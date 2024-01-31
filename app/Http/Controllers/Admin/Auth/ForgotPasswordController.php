@@ -1,9 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
+use App\Models\AdminPasswordReset;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+
+use function App\Http\Controllers\Helpers\verificationCode;
+use function Laravel\Prompts\password;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,4 +27,83 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('admin.guest');
+    }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showLinkRequestForm()
+    {
+        return view('admin.auth.passwords.email');
+    }
+
+    /**
+     * Get the broker to be used during password reset.
+     *
+     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     */
+
+     public function broker()
+     {
+        return password::broker('admins');
+     }
+
+    public function sendResetCodeEmail(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin) {
+            return back()->withErrors(['Email Not Available']);
+        }
+
+        $code = verificationCode(6);
+        $adminPasswordReset = new AdminPasswordReset();
+        $adminPasswordReset->email = $admin->email;
+        $adminPasswordReset->token = $code;
+        $adminPasswordReset->created_at = date("Y-m-d h:i:s");
+        $adminPasswordReset->save();
+       
+        $emai = $admin->email;
+        session()->put('pass_res_mail', $emai);
+
+        return to_route('admin.password.code.verify');
+  
+    }
+
+    public function codeVerify()
+    {
+        $pageTitle = 'Verify Code';
+        $email= session()->get('pass_re_mail');
+        if(!$email) {
+            $notify[] = ['error', 'Oops! session expired'];
+            return to_route('admin.password.reset')->withNotify($notify);
+        }
+        return view('admin.auth.passwords.code_verify', compact('pageTitle','email'));
+    }
+
+    public function verifyCode(Request $request)
+    {
+        $request->validate(['code' => 'required']);
+        $notify[] = ['success', 'You can change your password.'];
+        $code = str_replace(' ', '', $request->code);
+        
+        return to_route('admin.password.reset.form', $code)->withNotify($notify);
+    }
+    
 }

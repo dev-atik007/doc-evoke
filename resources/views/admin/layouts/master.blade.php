@@ -186,6 +186,8 @@
     <!-- Main JS -->
     <script src="{{ asset('public/admin/assets/js/main.js') }}"></script>
 
+    @include('partials.notify')
+
     <!-- Page JS -->
     <script src="{{ asset('public/admin/assets/js/dashboards-analytics.js') }}"></script>
 

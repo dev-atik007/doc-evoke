@@ -1,5 +1,5 @@
-
-
+<link rel="stylesheet" href="{{ asset('public/admin/assets/css/iziToast.min.css') }}" />
+<script src="{{ asset('public/admin/assets/js/iziToast.min.js') }}"></script>
 @if (session()->has('notify'))
     @foreach (session('notify') as $msg)
         <script>
@@ -11,7 +11,7 @@
 
 @if (isset($errors) && $errors->any())
     @php
-        $collection = collect($errors->all())
+        $collection = collect($errors->all());
         $errors = $collection->unique();
     @endphp
 

@@ -10,6 +10,18 @@ Route::namespace('Auth')->group(function () {
         Route::post('/', 'login')->name('login');
         Route::get('-logout', 'logout')->name('logout');
     });
+
+    Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function () {
+        Route::get('reset', 'showLinkRequestForm')->name('reset');
+        Route::post('reset', 'sendResetCodeEmail');
+        Route::get('code-verify', 'codeVerify')->name('code.verify');
+        Route::post('verify-code', 'verifyCode')->name('verify.code');
+    });
+
+    Route::controller('ResetPasswordController')->group(function () {
+        Route::get('password/reset/{token}', 'showResetForm')->name('password.reset.form');
+        Route::post('password/reset/change', 'reset')->name('password.change');
+    });
 });
 
 
