@@ -28,11 +28,12 @@ Route::namespace('Auth')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::controller('AdminController')->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::get('profile', 'profile')->name('profile');
+        Route::post('profile', 'profileUpdate')->name('profile.update');
+        Route::get('password', 'password')->name('password');
+        Route::post('password', 'passwordUpdate')->name('password.update');
     });
 });
 
 
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
