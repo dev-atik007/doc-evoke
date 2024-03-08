@@ -6,7 +6,7 @@
 </li>
 
 <li class="menu-item">
-  <a href="" class="menu-link">
+  <a href="{{ route('admin.department.index') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-collection"></i>
     <div data-i18n="Basic">Departments</div>
   </a>

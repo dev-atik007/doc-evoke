@@ -33,7 +33,12 @@ Route::middleware('admin')->group(function () {
         Route::get('password', 'password')->name('password');
         Route::post('password', 'passwordUpdate')->name('password.update');
     });
+
+    //Department And Location
+    Route::controller('DepartmentController')->prefix('department')->name('department.')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::post('store/{id?}', 'store')->name('store');
+    });
+
+    
 });
-
-
-

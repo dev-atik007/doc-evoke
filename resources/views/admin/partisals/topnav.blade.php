@@ -17,42 +17,8 @@
 
     <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-      <li class="dropdown">
-        <button type="button" class="primary--layer" data-bs-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-          <i class="las la-bell text--primary "></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu--md p-0 border-0 box--shadow1 dropdown-menu-right">
-          <div class="dropdown-menu__header">
-            <span class="caption">Notification</span>
 
-            <p>You have unread notification</p>
 
-            <p>@lang('No unread notification found')</p>
-
-          </div>
-          <div class="dropdown-menu__body">
-
-            <a href="" class="dropdown-menu__item">
-              <div class="navbar-notifi">
-                <div class="navbar-notifi__left bg--green b-radius--rounded"><img src="" alt="Profile Image"></div>
-                <div class="navbar-notifi__right">
-                  <h6 class="notifi__title">title</h6>
-                  <span class="time"><i class="far fa-clock"></i>
-                    diffForHumans</span>
-                </div>
-              </div><!-- navbar-notifi end -->
-            </a>
-
-          </div>
-          <div class="dropdown-menu__footer">
-            <a href="" class="view-all-message">View all notification</a>
-          </div>
-        </div>
-      </li>
-      <!-- Place this tag where you want the button to render. -->
-      <li class="nav-item lh-1 me-3">
-        <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-      </li>
 
       <!-- User -->
       <li class="nav-item navbar-dropdown dropdown-user dropdown">
