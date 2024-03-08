@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Location;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 
 use function App\Http\Controllers\Helpers\fileUploader;
 use function App\Http\Controllers\Helpers\getFilePath;
 use function App\Http\Controllers\Helpers\getFileSize;
+use function App\Http\Controllers\Helpers\getPaginate;
 
 class DepartmentController extends Controller
 {
@@ -20,7 +22,7 @@ class DepartmentController extends Controller
 
     public function store(Request $request, $id = 0)
     {
-       
+
         $imageValidation = $id ? 'nullabe' : 'required';
         $request->validate([
             'name'      => 'required|unique:departments|max:40',
@@ -48,6 +50,33 @@ class DepartmentController extends Controller
         $department->name   = $request->name;
         $department->details = $request->details;
         $department->save();
+        $notify[] = ['success', $notification];
+        return back()->withNotify($notify);
+    }
+
+    public function location()
+    {
+        $pageTitle = 'All Departments';
+        $locations = Location::paginate(getPaginate());
+        return view('admin.location.index', compact('pageTitle', 'locations'));
+    }
+
+    public function locationStore(Request $request, $id = 0)
+    {
+        $request->validate([
+            'name'  =>  'required|unique:locations|max:40|min:2'
+        ]);
+
+        if ($id) {
+            $location       = Location::findOrFail($id);
+            $notification   = 'Location updated successfully';
+        } else {
+            $location       = new Location();
+            $notification   = 'Location added successfully';
+        }
+
+        $location->name     = $request->name;
+        $location->save();
         $notify[] = ['success', $notification];
         return back()->withNotify($notify);
     }

@@ -44,3 +44,8 @@ function getFileSize($key)
 {
     return fileManager()->$key()->size;
 }
+
+function getPaginate($paginate = 20)
+{
+    return $paginate;
+}

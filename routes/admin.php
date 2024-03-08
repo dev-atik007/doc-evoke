@@ -38,7 +38,12 @@ Route::middleware('admin')->group(function () {
     Route::controller('DepartmentController')->prefix('department')->name('department.')->group(function () {
         Route::get('index', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
+        Route::get('location', 'location')->name('location');
+        Route::post('location/store/{id?}', 'locationStore')->name('location.store');
+
     });
 
     
+
+
 });

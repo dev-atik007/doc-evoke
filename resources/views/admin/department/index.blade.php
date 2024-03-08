@@ -89,7 +89,7 @@
 @endsection
 
 @push('breadcrumb-plugins')
-
+    
 
 <button type="button" class="btn btn-sm btn-outline--primary h-45 cuModalBtn" data-modal_title="Add New Department"> <i class="las la-plus"></i>Add New
 </button>
