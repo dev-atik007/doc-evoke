@@ -10,8 +10,6 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
-use function App\Http\Controllers\Helpers\verificationCode;
-use function Laravel\Prompts\password;
 
 class ForgotPasswordController extends Controller
 {

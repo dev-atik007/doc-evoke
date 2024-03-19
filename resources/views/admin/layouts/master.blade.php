@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Test</title>
+  <title>{{ $general->siteName($pageTitle ?? '') }}</title>
 
   <meta name="description" content="" />
 
@@ -90,9 +90,9 @@
             <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
           </a>
 
-          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i class="bx bx-chevron-left bx-sm align-middle"></i>
-          </a>
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
         </div>
 
         <div class="menu-inner-shadow"></div>
@@ -165,24 +165,8 @@
   <script src="{{ asset('public/admin/assets/js/app.js') }}"></script>
   <script src="{{ asset('public/admin/assets/js/cu-modal.js') }}"></script>
 
-  
-  {{-- LOAD NIC EDIT --}}
-  <script>
-    "use strict";
-    bkLib.onDomLoaded(function() {
-        $( ".nicEdit" ).each(function( index ) {
-            $(this).attr("id","nicEditor"+index);
-            new nicEditor({fullPanel : true}).panelInstance('nicEditor'+index,{hasPanel : true});
-        });
-    });
-    (function($){
-        $( document ).on('mouseover ', '.nicEdit-main,.nicEdit-panelContain',function(){
-            $('.nicEdit-main').focus();
-        });
-    })(jQuery);
-  </script>
-
   @stack('script')
+  
 
 </body>
 

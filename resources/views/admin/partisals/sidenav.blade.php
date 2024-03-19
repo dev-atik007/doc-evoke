@@ -14,7 +14,7 @@
 
 <li class="menu-item">
   <a href="{{ route('admin.department.location') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-collection"></i>
+    <i class="menu-icon fa-solid fa-location-dot"></i>
     <div data-i18n="Basic">Locations</div>
   </a>
 </li>
@@ -103,22 +103,22 @@
 
   <ul class="menu-sub">
     <li class="menu-item">
-      <a href="layouts-without-menu.html" class="menu-link">
+      <a href="{{ route('admin.doctor.form') }}" class="menu-link">
         <div data-i18n="Without menu">Add New</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
+      <a href="{{ route('admin.doctor.index') }}" class="menu-link">
         <div data-i18n="Without navbar">All Doctors</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-container.html" class="menu-link">
+      <a href="{{ route('admin.doctor.active') }}" class="menu-link">
         <div data-i18n="Container">Active Doctors</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-fluid.html" class="menu-link">
+      <a href="{{ route('admin.doctor.inactive') }}" class="menu-link">
         <div data-i18n="Fluid">Inactive Doctors</div>
       </a>
     </li>
@@ -145,12 +145,12 @@
 
   <ul class="menu-sub">
     <li class="menu-item">
-      <a href="layouts-without-menu.html" class="menu-link">
+      <a href="{{ route('admin.assistant.form') }}" class="menu-link">
         <div data-i18n="Without menu">Add New</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
+      <a href="{{ route('admin.assistant.index') }}" class="menu-link">
         <div data-i18n="Without navbar">All Assistants</div>
       </a>
     </li>
@@ -187,12 +187,12 @@
 
   <ul class="menu-sub">
     <li class="menu-item">
-      <a href="layouts-without-menu.html" class="menu-link">
+      <a href="{{ route('admin.staff.form') }}" class="menu-link">
         <div data-i18n="Without menu">Add New</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
+      <a href="{{ route('admin.staff.index') }}" class="menu-link">
         <div data-i18n="Without navbar">All Assistants</div>
       </a>
     </li>
@@ -312,7 +312,7 @@
 
 <!-- General Setting -->
 <li class="menu-item">
-  <a href="" class="menu-link">
+  <a href="{{ route('admin.setting.index') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-support"></i>
     <div data-i18n="Support">General Setting</div>
   </a>

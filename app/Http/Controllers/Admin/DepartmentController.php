@@ -8,16 +8,14 @@ use App\Models\Location;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 
-use function App\Http\Controllers\Helpers\fileUploader;
-use function App\Http\Controllers\Helpers\getFilePath;
-use function App\Http\Controllers\Helpers\getFileSize;
-use function App\Http\Controllers\Helpers\getPaginate;
 
 class DepartmentController extends Controller
 {
     public function index()
     {
-        return view('admin.department.index');
+        $pageTitle = 'All Departments';
+        $departments = Department::paginate(getPaginate(2));
+        return view('admin.department.index', compact('pageTitle', 'departments'));
     }
 
     public function store(Request $request, $id = 0)
@@ -56,7 +54,7 @@ class DepartmentController extends Controller
 
     public function location()
     {
-        $pageTitle = 'All Departments';
+        $pageTitle = 'All Locations';
         $locations = Location::paginate(getPaginate());
         return view('admin.location.index', compact('pageTitle', 'locations'));
     }

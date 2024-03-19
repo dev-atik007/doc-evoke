@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Rules\FileTypeValidate;
 use Illuminate\Support\Facades\Hash;
 
-use function App\Http\Controllers\Helpers\fileUploader;
-use function App\Http\Controllers\Helpers\getFilePath;
-use function App\Http\Controllers\Helpers\getFileSize;
+
 
 class AdminController extends Controller
 {

@@ -40,10 +40,39 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('location', 'location')->name('location');
         Route::post('location/store/{id?}', 'locationStore')->name('location.store');
-
     });
 
-    
+    // Doctor Manage
+    Route::controller('ManageDoctorsController')->prefix('doctor')->name('doctor.')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('active', 'active')->name('active');
+        Route::get('inactive', 'inactive')->name('inactive');
+        
+        Route::post('status/{id}', 'status')->name('status');
+        Route::get('form', 'form')->name('form');
+        Route::post('store/{id?}', 'store')->name('store');
+    });
 
+    Route::controller('GeneralSettingController')->group(function () {
+        // General Setting
+        Route::get('general-setting', 'index')->name('setting.index');
+        Route::post('general-setting', 'update')->name('setting.update');
+    });
 
+    // Assistant Manage
+    Route::controller('ManageAssistantsController')->prefix('assistant')->name('assistant.')->group(function () {
+        Route::get('index', 'index')->name('index');
+
+        Route::get('status/{id}', 'status')->name('status');
+        Route::get('form', 'form')->name('form');
+        Route::post('store/{id?}', 'store')->name('store');
+    });
+
+    // Staff Manage
+    Route::controller('ManageStaffsController')->prefix('staff')->name('staff.')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('form', 'form')->name('form');
+        Route::post('store/{id?}', 'store')->name('store');
+        Route::get('detail/{id}', 'detail')->name('detail');
+    });
 });
