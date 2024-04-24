@@ -169,6 +169,7 @@
         "use strict";
 
         let addModal = $("#myModal");
+        
         let editModal = $("#editModal");
 
 

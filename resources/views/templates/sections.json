@@ -1,0 +1,11 @@
+{
+    "department": {
+        "builder": true,
+        "name": "Department Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        }
+    },
+
+}

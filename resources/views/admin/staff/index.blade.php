@@ -27,32 +27,32 @@
                     </td>
                     <td><span class="d-block fw-bold">{{$general->country_code . $staff->mobile }}</span> {{ $staff->email }}</td>
                     <td>
-                        {{ $staff->created_at }} <br>
-                        {{ $staff->created_at }}
+                        {{ showDateTime($staff->created_at) }} <br>
+                        {{ diffForHumans($staff->created_at) }}
                     </td>
-                    <td> @php echo $staff->statusBadge @endphp </td>
+                    <td> @php echo $staff->statusBadge($staff->status) @endphp </td>
                     <td>
                         <div class="button--group">
-                            <a href=""
+                            <a href="{{ route('admin.staff.detail', $staff->id) }}"
                                 class="btn btn-sm btn-outline--primary">
                                 <i class="las la-desktop"></i> @lang('Details')
                             </a>
 
-                    
+                            @if($staff->status == 1)
                                 <button type="button"
                                     class="btn btn-sm btn-outline--danger confirmationBtn"
-                                    data-action=""
+                                    data-action="{{ route('admin.staff.status', $staff->id) }}"
                                     data-question="@lang('Are you sure to Inactive this staff?')">
                                     <i class="la la-eye-slash"></i> @lang('Inactive')
                                 </button>
-                          
+                                @else
                                 <button type="button"
                                     class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
-                                    data-action=""
+                                    data-action="{{ route('admin.staff.status', $staff->id) }}"
                                     data-question="@lang('Are you sure to Active this staff?')">
                                     <i class="la la-eye"></i> @lang('Active')
                                 </button>
-                           
+                                @endif
                         </div>
                     </td>
                 </tr>
@@ -62,9 +62,12 @@
             </tbody>
         </table>
     </div>
-
+    <div class="p-4">
+        {{ $staffs->links() }}
+    </div>
 </div>
 
+<x-confirmation-modal />
 @endsection
 
 @push('breadcrumb-plugins')

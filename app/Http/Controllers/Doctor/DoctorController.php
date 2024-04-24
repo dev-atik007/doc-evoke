@@ -9,6 +9,7 @@ class DoctorController extends Controller
 {
     public function dashboard()
     {
-        return view('doctor.dashboard');
+        $pageTitle = 'Doctor Dashboard';
+        return view('doctor.dashboard', compact('pageTitle'));
     }
 }

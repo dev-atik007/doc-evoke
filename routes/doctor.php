@@ -19,3 +19,8 @@ Route::middleware('doctor')->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
     });
 });
+
+Route::controller('ScheduleController')->name('schedule.')->prefix('schedule')->group(function () {
+    Route::get('index', 'index')->name('index');
+    Route::post('update', 'update')->name('update');
+});

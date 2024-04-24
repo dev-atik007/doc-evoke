@@ -11,16 +11,15 @@ class GeneralSetting extends Model
 
     public function scopeSiteName($query, $pageTitle)
     {
-        $pageTitle = empty($pageTitle) ? '' : ' _ ' . $pageTitle;
+        $pageTitle = empty($pageTitle) ? '' : ' | ' . $pageTitle;
         return $this->site_name . $pageTitle;
     }
 
     protected static function boot()
     {
         parent::boot();
-        static::saved(function() {
+        static::saved(function () {
             \cache::forget('GeneralSetting');
         });
     }
-    
 }

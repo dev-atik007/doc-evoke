@@ -8,10 +8,6 @@
 
   </div>
   <div class="d-none d-lg-inline-block">
-
-
     <a target="_blank" class="footer-link me-4">Documentation</a>
-
-    >
   </div>
 </div>

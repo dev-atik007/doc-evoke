@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::middleware('admin')->group(function () {
     Route::controller('DepartmentController')->prefix('department')->name('department.')->group(function () {
         Route::get('index', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
+        
         Route::get('location', 'location')->name('location');
         Route::post('location/store/{id?}', 'locationStore')->name('location.store');
     });
@@ -48,9 +50,13 @@ Route::middleware('admin')->group(function () {
         Route::get('active', 'active')->name('active');
         Route::get('inactive', 'inactive')->name('inactive');
         
+
         Route::post('status/{id}', 'status')->name('status');
+        Route::post('featured/{id}', 'featured')->name('featured');
+
         Route::get('form', 'form')->name('form');
         Route::post('store/{id?}', 'store')->name('store');
+        Route::get('detail/{id}', 'detail')->name('detail');
     });
 
     Route::controller('GeneralSettingController')->group(function () {
@@ -62,17 +68,47 @@ Route::middleware('admin')->group(function () {
     // Assistant Manage
     Route::controller('ManageAssistantsController')->prefix('assistant')->name('assistant.')->group(function () {
         Route::get('index', 'index')->name('index');
+        Route::get('active', 'active')->name('active');
+        Route::get('inactive', 'inactive')->name('inactive');
 
-        Route::get('status/{id}', 'status')->name('status');
+        Route::post('status/{id}', 'status')->name('status');
         Route::get('form', 'form')->name('form');
         Route::post('store/{id?}', 'store')->name('store');
+        Route::get('detail/{id}', 'detail')->name('detail');
     });
 
     // Staff Manage
     Route::controller('ManageStaffsController')->prefix('staff')->name('staff.')->group(function () {
         Route::get('index', 'index')->name('index');
+        Route::get('active', 'active')->name('active');
+        Route::get('inactive', 'inactive')->name('inactive');
+
+        Route::post('status/{id}', 'status')->name('status');
         Route::get('form', 'form')->name('form');
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('detail/{id}', 'detail')->name('detail');
     });
+
+    Route::controller('AppointmentController')->prefix('appointment')->name('appointment.')->group(function (){
+        Route::get('index', 'index')->name('index');
+
+        Route::get('form', 'form')->name('form');
+
+        Route::get('details', 'details')->name('book.details');
+
+        Route::get('booked/date', 'availability')->name('available.date');
+
+        Route::post('store/{id}', 'store')->name('store');
+
+    });
+
+    // Frontend
+    // Route::name('frontend.')->prefix('frontend')->group(function () {
+        
+    //     Route::controller('FrontendController')->group(function () {
+    //         Route::get('templates', 'templates')->name('templates');
+    //     });
+    // });
+
+
 });

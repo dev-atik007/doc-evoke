@@ -59,6 +59,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
+     
     protected function guard()
     {   
         return auth()->guard('admin');

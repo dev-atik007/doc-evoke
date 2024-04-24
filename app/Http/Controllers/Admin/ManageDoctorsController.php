@@ -22,8 +22,6 @@ class ManageDoctorsController extends Controller
 
     public function status($id,$column = 'status')
     {
-       
-        
         $query     = Doctor::findOrFail($id);
         $column = strtolower($column);
         if ($query->$column == Status::ENABLE) {
@@ -31,7 +29,7 @@ class ManageDoctorsController extends Controller
         } else {
             $query->$column = Status::ENABLE;
         }
-        $message       = keyToTitle($column). ' changed successfully';
+        $message   = keyToTitle($column). ' changed successfully';
 
         $query->save();
         $notify[] = ['success', $message];
@@ -55,6 +53,22 @@ class ManageDoctorsController extends Controller
     protected function commonQuery()
     {
         return Doctor::orderBy('id', 'DESC')->with('department', 'location');
+    }
+
+    public function featured($id, $column = 'status')
+    {
+        $query              = Doctor::findOrFail($id);
+        $column             = strtolower($column);
+        if ($query->$column == Status::ENABLE) {
+            $query->$column = Status::DISABLE;
+        } else {
+            $query->$column = Status::ENABLE;
+        }
+        $message            = keyToTitle($column) . ' change successfully';
+
+        $query->save();
+        $notify[] = ['success', $message];
+        return back()->withNotify($notify);
     }
 
 
@@ -125,7 +139,6 @@ class ManageDoctorsController extends Controller
                 return back()->withNotify($notify);
             }
         }
-        // ?????? gs ?
         $general = gs();
         $mobile = $general->country_code . $request->mobile;
 
@@ -141,6 +154,12 @@ class ManageDoctorsController extends Controller
         $doctor->address        = $request->address;
         $doctor->about          = $request->about;
         $doctor->save();
+    }
+
+    public function detail($id)
+    {
+        $pageTitle         = 'Doctor Detail - ';
+        return view('admin.doctor.detail', compact('pageTitle'));
     }
 
 

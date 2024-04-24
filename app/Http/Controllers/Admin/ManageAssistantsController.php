@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Assistant;
 use Illuminate\Http\Request;
@@ -21,9 +22,38 @@ class ManageAssistantsController extends Controller
         return view('admin.assistant.index', compact('pageTitle', 'assistants'));
     }
 
-    public function status($id)
+    public function status($id, $column = 'status')
     {
-        return Assistant::changeStatus($id);
+        $query  = Assistant::findOrFail($id);
+        $column = strtolower($column);
+        if ($query->$column == Status::ENABLE) {
+            $query->$column = Status::DISABLE;
+        } else {
+            $query->$column = Status::ENABLE;
+        }
+        $message = keyToTitle($column) . ' change Successfully';
+        $query->save();
+        $notify[] = ['success', $message];
+        return back()->withNotify($notify);
+    }
+
+    public function active()
+    {
+        $pageTitle = 'Active Assistants';
+        $assistants = $this->commonQuery()->where('status', Status::ACTIVE)->paginate(getPaginate());
+        return view('admin.assistant.index', compact('pageTitle','assistants'));
+    }
+
+    public function inactive()
+    {
+        $pageTitle = 'Inactive Assistants';
+        $assistants = $this->commonQuery()->where('status', Status::INACTIVE)->paginate(getPaginate());
+        return view('admin.assistant.index', compact('pageTitle', 'assistants'));
+    }
+    
+    protected function commonQuery()
+    {
+        return Assistant::orderBy('id', 'DESC')->with('department', 'location');
     }
 
     public function form()
@@ -76,7 +106,6 @@ class ManageAssistantsController extends Controller
 
     protected function assistantSave($assistant, $request)
     {
-        // ?????
         $doctors = Doctor::findOrFail($request->doctor_id);
 
         if ($request->hasFile('image')) {
@@ -103,7 +132,8 @@ class ManageAssistantsController extends Controller
 
     public function detail($id)
     {
-        return view('admin.assistant.detail');
+        $pageTitle         = 'Assistant Detail - ';
+        return view('admin.assistant.detail', compact('pageTitle'));
     }
 
 }

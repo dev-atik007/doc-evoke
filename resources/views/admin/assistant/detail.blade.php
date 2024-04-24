@@ -1,75 +1,95 @@
 @extends('admin.layouts.abc')
 @section('panel')
-<div class="row">
-        <div class="col-12">
-            <div class="row gy-4">
-                <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                    link="#"
-                    icon="las la-stethoscope f-size--56"
-                    title="Total Assign Doctors"
-                    value="{{ $totalDoctors }}"
-                    bg="19"
-                    />
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                    link="#"
-                    icon="las la-hands-helping f-size--56"
-                    title="Total Appointments"
-                    value="{{ $totalAppointment }}"
-                    bg="11"
-                    />
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                    link="#"
-                    icon="las la-check-circle f-size--56"
-                    title="Total Completed Appointments"
-                    value="{{ $completeAppointment }}"
-                    bg="success"
-                    />
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <x-widget
-                    link="#"
-                    icon="las la-handshake f-size--56"
-                    title="Total New Appointments"
-                    value="{{ $newAppointment }}"
-                    bg="19"
-                    />
-                </div>
+<div class="row mb-4 g-3">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+            <div class="content-left">
+                <h3 class="mb-0">$24,983</h3>
+                <small>Total Earning</small>
             </div>
+            <span class="badge bg-label-primary rounded-circle p-2">
+                <i class="bx bx-dollar bx-sm"></i>
+            </span>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+            <div class="content-left">
+                <h3 class="mb-0">$8,647</h3>
+                <small>Unpaid Earning</small>
+            </div>
+            <span class="badge bg-label-success rounded-circle p-2">
+                <i class="bx bx-gift bx-sm"></i>
+            </span>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+            <div class="content-left">
+                <h3 class="mb-0">2,367</h3>
+                <small>Signups</small>
+            </div>
+            <span class="badge bg-label-danger rounded-circle p-2">
+                <i class="bx bx-user bx-sm"></i>
+            </span>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+            <div class="content-left">
+                <h3 class="mb-0">4.5%</h3>
+                <small>Conversion Rate</small>
+            </div>
+            <span class="badge bg-label-info rounded-circle p-2">
+                <i class="bx bx-infinite bx-sm"></i>
+            </span>
+            </div>
+        </div>
+        </div>
+    </div>
 
-            <div class="d-flex flex-wrap gap-3 mt-4">
+
+    <div class="d-flex flex-wrap gap-3 mt-4">
                 <div class="flex-fill">
-                    <a href=""
-                        class="btn btn--primary btn--shadow w-100 btn-lg">
-                        <i class="las la-history"></i>@lang('Login History')
+                    <a href="" class="btn btn--primary w-100 btn-lg">
+                        <i class="las la-history"></i>Login History
                     </a>
                 </div>
                 <div class="flex-fill">
                     <a href=""
-                        class="btn btn--warning btn--shadow w-100 btn-lg">
-                        <i class="las la-envelope"></i>@lang('Notification Logs')
+                        class="btn btn--warning w-100 btn-lg">
+                        <i class="las la-envelope"></i>Notification Logs
                     </a>
                 </div>
-
                 <div class="flex-fill">
                     <a href="" target="_blank"
-                        class="btn btn--primary btn--gradi btn--shadow w-100 btn-lg">
-                        <i class="las la-sign-in-alt"></i>@lang('Login as Assistant')
+                        class="btn btn--primary btn--gradi w-100 btn-lg">
+                        <i class="las la-sign-in-alt"></i>Login as Doctor
                     </a>
                 </div>
             </div>
+    </div>
 
-            <div class="card mt-30">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">@lang('Information of') {{ $assistant->name }}</h5>
-                </div>
+
+<div class="row mb-none-30">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
                 <div class="card-body">
-                    <form action="" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.assistant.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-4">
@@ -87,8 +107,7 @@
                                                 </div>
                                                 <div class="avatar-edit mt-0">
                                                     <input type="file" class="profilePicUpload" name="image"
-                                                        value="{{ $assistant->image }}" id="profilePicUpload1"
-                                                        accept=".png, .jpg, .jpeg">
+                                                        id="profilePicUpload1" accept=".png, .jpg, .jpeg" required>
                                                     <label for="profilePicUpload1"
                                                         class="btn btn--success btn-block btn-lg">Upload</label>
                                                     <small>Support Images:
@@ -105,14 +124,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" name="name" value="{{ $assistant->name }}"
+                                            <input type="text" name="name" value="{{ old('name') }}"
                                                 class="form-control " required />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Username</label>
-                                            <input type="text" name="username" value="{{ $assistant->username }}"
+                                            <input type="text" name="username" value="{{ old('username') }}"
                                                 class="form-control " required />
                                         </div>
                                     </div>
@@ -120,7 +139,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>E-mail</label>
-                                            <input type="text" name="email" value="{{ $assistant->email }}"
+                                            <input type="text" name="email" value="{{ old('email') }}"
                                                 class="form-control " required />
                                         </div>
                                     </div>
@@ -131,17 +150,18 @@
                                                 <i class="fa fa-info-circle text--primary" title="@lang('Add the country code by general setting. Otherwise, SMS won\'t send to that number.')">
                                                 </i>
                                             </label>
-
                                             <div class="input-group">
                                                 <span class="input-group-text">{{ $general->country_code }}</span>
-                                                <input type="number" name="mobile" value="{{ str_replace($general->country_code, '', $assistant->mobile) }}" class="form-control" autocomplete="off" required>
+                                                <input type="number" name="mobile" value="{{ old('mobile') }}"
+                                                    class="form-control" autocomplete="off" required>
                                             </div>
+
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12">
                                         <div class="form-group" id="select2-wrapper">
-                                            <label>@lang('Assign Doctors')</label>
+                                            <label>Assign Doctors</label>
                                             <select class="select2-multi-select form-control" name="doctor_id[]"
                                                 multiple="multiple" required>
                                                 <option disabled>Select One</option>
@@ -152,8 +172,8 @@
 
                                     <div class="col-sm-12">
                                         <div class="from-group">
-                                            <label>Address</label>
-                                            <textarea name="address" class="form-control" required>{{ $assistant->address }}</textarea>
+                                            <label>Address </label>
+                                            <textarea name="address" class="form-control" required>{{ old('address') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -169,3 +189,8 @@
         </div>
     </div>
 @endsection
+
+@push('breadcrumb-plugins')
+    <a href="{{ route('admin.assistant.index') }}" class="btn btn-sm btn-outline--primary"><i class="la la-undo"></i>
+    Back </a>
+@endpush

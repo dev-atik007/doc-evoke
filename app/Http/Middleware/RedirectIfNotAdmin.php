@@ -19,6 +19,7 @@ class RedirectIfNotAdmin
         if (!Auth::guard($guard)->check()) {
             return to_route('admin.login');
         }
+        
         return $next($request);
     }
 }

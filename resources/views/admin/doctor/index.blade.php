@@ -30,7 +30,6 @@
                     <td>100 {{ $general->cur_text }}</td>
                     <td>
                         <span>{{ $doctor->department->name }} </span>
-
                     </td>
                     <td>
                         {{ showDateTime($doctor->created_at) }} <br>
@@ -40,30 +39,29 @@
                     <th>@php echo $doctor->statusBadge($doctor->status) @endphp</th>
                     <th>
                         <div class="button--group">
-                            <a href="" class="btn btn-sm btn-outline--primary">
+                            <a href="{{ route('admin.doctor.detail', $doctor->id) }}" class="btn btn-sm btn-outline--primary">
                                 <i class="las la-desktop"></i> @lang('Details')
                             </a>
-
-                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="" data-question="@lang('Are you sure to NonFeature this doctor?')">
+                            @if($doctor->featured == 1)
+                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="{{ route('admin.doctor.featured', $doctor->id) }}" data-question="@lang('Are you sure to NonFeature this doctor?')">
                                 <i class="la la-eye-slash"></i> @lang('NonFeature')
                             </button>
-
-                            <button type="button" class="btn btn-sm btn-outline--success ms-1 confirmationBtn" data-action="" data-question="@lang('Are you sure to featured this doctor?')">
-                                <i class="la la-eye"></i> @lang('Featured')
-                            </button>
-
-                            @if($doctor->status == 1)
-                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="{{ route('admin.doctor.status', $doctor->id) }}" data-question="Are you sure to Inactive this doctor?">
-                                <i class="la la-eye-slash"></i> @lang('Inactive')
-                            </button>
                             @else
-                            <button type="button" class="btn btn-sm btn-outline--success ms-1 confirmationBtn" data-action="{{ route('admin.doctor.status', $doctor->id) }}" data-question="Are you sure to Active this doctor?">
-                                <i class="la la-eye"></i> @lang('Active')
+                            <button type="button" class="btn btn-sm btn-outline--success ms-1 confirmationBtn" data-action="{{ route('admin.doctor.featured', $doctor->id) }}" data-question="@lang('Are you sure to featured this doctor?')">
+                                <i class="la la-eye"></i> Featured
                             </button>
                             @endif
 
 
-
+                            @if($doctor->status == 1)
+                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="{{ route('admin.doctor.status', $doctor->id) }}" data-question="Are you sure to Inactive this doctor?">
+                                <i class="la la-eye-slash"></i> Inactive
+                            </button>
+                            @else
+                            <button type="button" class="btn btn-sm btn-outline--success ms-1 confirmationBtn" data-action="{{ route('admin.doctor.status', $doctor->id) }}" data-question="Are you sure to Active this doctor?">
+                                <i class="la la-eye"></i> Active
+                            </button>
+                            @endif
                         </div>
                     </th>
                 </tr>
@@ -73,8 +71,11 @@
             </tbody>
         </table>
     </div>
+    <div class="p-4">
+        {{ $doctors->links() }}
+    </div>
 </div>
-{{ $doctors->links() }}
+
 
 <x-confirmation-modal />
 @endsection

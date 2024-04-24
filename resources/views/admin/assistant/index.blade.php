@@ -33,25 +33,25 @@
                         <td> @php echo $assistant->statusBadge($assistant->status) @endphp </td>
                         <td>
                             <div class="button--group">
-                                <a href=""
+                                <a href="{{ route('admin.assistant.detail', $assistant->id) }}"
                                     class="btn btn-sm btn-outline--primary">
-                                    <i class="las la-desktop"></i> @lang('Details')
-                                </a>
-                      
+                                    <i class="las la-desktop"></i> Details
+                                </a>  
+                                @if($assistant->status == 1)
                                     <button type="button"
                                         class="btn btn-sm btn-outline--danger confirmationBtn"
-                                        data-action=""
-                                        data-question="@lang('Are you sure to inactive this assistant?')">
-                                        <i class="la la-eye-slash"></i> @lang('Inactive')
+                                        data-action="{{ route('admin.assistant.status', $assistant->id) }}"
+                                        data-question="Are you sure to inactive this assistant?">
+                                        <i class="la la-eye-slash"></i> Inactive
                                     </button>
-                             
+                                @else
                                     <button type="button"
                                         class="btn btn-sm btn-outline--success ms-1 confirmationBtn"
-                                        data-action=""
-                                        data-question="@lang('Are you sure to active this assistant?')">
-                                        <i class="la la-eye"></i> @lang('Active')
+                                        data-action="{{ route('admin.assistant.status', $assistant->id) }}"
+                                        data-question="Are you sure to active this assistant?">
+                                        <i class="la la-eye"></i> Active
                                     </button>
-                            
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -66,6 +66,7 @@
     </div>
 </div>
 
+<x-confirmation-modal />
 @endsection
 
 @push('breadcrumb-plugins')
