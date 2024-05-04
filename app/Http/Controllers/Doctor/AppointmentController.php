@@ -1,45 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Doctor;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Constants\Status;
 
 class AppointmentController extends Controller
 {
+   
+
     public function index()
     {
-        $pageTitle = 'All New Appointments';
-        $appointments = Appointment::newAppointment()->with('staff', 'doctor', 'assistant')->latest();
+        $pageTitle = 'All New Appointment';
+        $appointments = Appointment::newAppointment()->with('staff', 'doctor', 'assistant');
         $appointments = $this->detectUserType($appointments);
-        return view('admin.appointment.index', compact('pageTitle', 'appointments'));
+        return view('doctor.appointment.index', compact('pageTitle', 'appointments'));
     }
 
-    public function form()
+    public function booking(Request $request)
     {
-        // $ab =0;
-        // if($ab == 0){
-        //     return p;
-
-        // }else{
-        //     return u;
-        // }
-        // $ab == 0? 'p':'u';
-        $pageTitle = 'Make Appointment';
-        $doctors = Doctor::orderBy('name')->get();
-        return view('admin.appointment.form', compact('pageTitle', 'doctors'));
-    }
-
-    public function details(Request $request)
-    {
-        $doctor = Doctor::where('id', $request->doctor_id)->firstOrFail();
-        $pageTitle = $doctor->name . ' - Details';
-
         
+        $doctor = auth()->guard('doctor')->user();
+        $pageTitle = "Details";
+
         if(!$doctor->serial_or_slot) {
             $notify[] = ['error', 'No available schedule for this doctor!'];
             return back()->withNotify($notify);
@@ -51,7 +38,9 @@ class AppointmentController extends Controller
             array_push($availableDate, date('Y-m-d', strtotime($date)));
             $date->addDays(1);
         }
-        return view('admin.appointment.booking', compact('pageTitle', 'doctor', 'availableDate'));
+
+        return view('doctor.appointment.booking', compact('doctor','pageTitle', 'availableDate'));
+
     }
 
     public function availability(Request $request)
@@ -69,17 +58,18 @@ class AppointmentController extends Controller
     {
         $this->validation($request);
 
+
         $doctor = Doctor::find($id);
 
         $general = gs();
-        $mobile  = $general->country_code . $request->mobile;
+        $mobile = $general->country_code . $request->mobile;
 
         $appointment                = new Appointment();
         $appointment->booking_date  = Carbon::parse($request->booking_date)->format('Y-m-d');
         $appointment->time_serial   = $request->time_serial;
         $appointment->name          = $request->name;
         $appointment->email         = $request->email;
-        $appointment->mobile         = $mobile;
+        $appointment->mobile        = $mobile;
         $appointment->age           = $request->age;
         $appointment->doctor_id     = $doctor->id;
         $appointment->disease       = $request->disease;
@@ -97,7 +87,7 @@ class AppointmentController extends Controller
         }
 
         $appointment->save();
-
+        
         $notify[] = ['success', 'New Appointment make successfully'];
         return back()->withNotify($notify);
     }
@@ -114,15 +104,10 @@ class AppointmentController extends Controller
                 'age'           => 'required|integer|gt:0',
             ],
             [
-                'time_serial.required'  =>  'You did not select any time or serial',
+                'time_serial.required' => 'You did not select any time or serial',
             ]
         );
     }
-
-    
-
-
-
 
     
 }

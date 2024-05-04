@@ -10,6 +10,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Doctor extends Authenticatable
 {
     use HasFactory;
+   
+    protected $casts = [
+        'serial_or_slot' => 'object',
+    ];
+
+    protected $guarded = ['id'];
 
     public function department()
     {

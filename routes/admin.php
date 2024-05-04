@@ -50,10 +50,9 @@ Route::middleware('admin')->group(function () {
         Route::get('active', 'active')->name('active');
         Route::get('inactive', 'inactive')->name('inactive');
         
-
         Route::post('status/{id}', 'status')->name('status');
         Route::post('featured/{id}', 'featured')->name('featured');
-
+        
         Route::get('form', 'form')->name('form');
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('detail/{id}', 'detail')->name('detail');
@@ -90,25 +89,19 @@ Route::middleware('admin')->group(function () {
     });
 
     Route::controller('AppointmentController')->prefix('appointment')->name('appointment.')->group(function (){
+        //Create Appointment
         Route::get('index', 'index')->name('index');
-
         Route::get('form', 'form')->name('form');
-
         Route::get('details', 'details')->name('book.details');
-
-        Route::get('booked/date', 'availability')->name('available.date');
-
+        Route::get('booking/availability/date', 'availability')->name('available.date');
         Route::post('store/{id}', 'store')->name('store');
+
+
+        //Appointment
 
     });
 
-    // Frontend
-    // Route::name('frontend.')->prefix('frontend')->group(function () {
-        
-    //     Route::controller('FrontendController')->group(function () {
-    //         Route::get('templates', 'templates')->name('templates');
-    //     });
-    // });
+
 
 
 });

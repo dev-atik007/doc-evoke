@@ -17,7 +17,39 @@
                 </tr>
             </thead>
             <tbody>
-                
+                @forelse ($appointments as $appointment)
+                    <tr>
+                        <td>{{ $appointments->firstItem() + $loop->index }}</td>
+                        <td><span class="fw-bold d-block"> {{ __($appointment->name) }}</span>
+                            {{ $appointment->mobile }}</td>
+                        <td>{{ $appointment->doctor->name }}</td>
+                        <td>
+                            @if ($appointment->added_staff_id)
+                                    <a href="">{{ __(@$appointment->staff->name) }}</a>
+                                        <br> <span
+                                        class="text--small badge badge--primary">Staff</span>
+                                @elseif($appointment->added_assistant_id)
+                                    <a href=""> {{ __(@$appointment->assistant->name) }}</a>
+                                    <br> <span
+                                        class="text--small badge badge--dark">Assistant</span>
+                                @elseif($appointment->added_doctor_id)
+                                    <a href=""> {{ __(@$appointment->doctor->name) }}</a> <br> <span
+                                        class="text--small badge badge--success">Doctor</span>
+                                @elseif($appointment->added_admin_id)
+                                    {{ __(@$appointment->admin->name) }} <br> <span
+                                        class="text--small badge badge--primary">Admin</span>
+                                @elseif($appointment->site)
+                                    <span class="text--small badge badge--info">Site</span>
+                            @endif
+                        </td>
+                        <td>{{ $appointment->booking_date }}</td>
+                        <td>{{ $appointment->time_serial }}</td>
+                        <td></td>
+
+                    </tr>
+                @empty
+                    
+                @endforelse
             </tbody>
         </table>
     </div>

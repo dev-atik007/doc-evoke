@@ -13,14 +13,30 @@ Route::namespace('Auth')->group(function () {
 });
 
 
-
 Route::middleware('doctor')->group(function () {
     Route::controller('DoctorController')->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
+
+        Route::get('profile', 'profile')->name('profile');
+        Route::post('profile', 'profileUpdate')->name('profile.update');
+
+        Route::get('password', 'password')->name('password');
+        Route::post('password', 'passwordUpdate')->name('password.update');
+    });
+
+    Route::controller('ScheduleController')->name('schedule.')->prefix('schedule')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::post('update', 'update')->name('update');
+    });
+
+    Route::controller('AppointmentController')->name('appointment.')->prefix('appointment')->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('booking', 'booking')->name('booking');
+        Route::get('booked/date', 'availability')->name('available.date');
+        Route::post('store/{id}', 'store')->name('store');
+        
     });
 });
 
-Route::controller('ScheduleController')->name('schedule.')->prefix('schedule')->group(function () {
-    Route::get('index', 'index')->name('index');
-    Route::post('update', 'update')->name('update');
-});
+
+

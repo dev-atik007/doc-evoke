@@ -1,4 +1,4 @@
-@extends('admin.layouts.abc')
+@extends('doctor.layouts.abc')
 @section('panel')
 
 <div class="row mb-none-30">
@@ -74,7 +74,7 @@
     </div>
 
     <div class="col-xl-9 col-lg-8 mb-30">
-        <form action="{{ route('admin.appointment.store', $doctor->id) }}" method="post">
+        <form action="{{ route('doctor.appointment.store', $doctor->id) }}" method="post">
             @csrf
             <div class="card b-radius--10 overflow-hidden box--shadow1">
                 <div class="card-body p-0">
@@ -98,9 +98,9 @@
                             <label class="mb-2 date-label">Select Date</label>
                             <select name="booking_date" class="form-control" required>
                                 <option selected disabled>Select One</option>
-                                @foreach ($availableDate as $date)
-                                    <option value="{{ $date }}">{{ __($date) }}</option>
-                                @endforeach
+                                    @foreach ($availableDate as $date)
+                                        <option value="{{ $date }}">{{ __($date) }}</option>
+                                    @endforeach
                             </select>
                         </div>
 
@@ -197,7 +197,7 @@
 
                 $('.available-time').removeClass('btn--success disabled').addClass('btn--primary');
 
-                let url = "{{ route('admin.appointment.available.date') }}";
+                let url = "{{ route('doctor.appointment.available.date') }}";
                 let data = {
                     date: $(this).val(),
                     doctor_id: '{{ $doctor->id }}'
@@ -218,3 +218,4 @@
         })(jQuery);
     </script>
 @endpush
+

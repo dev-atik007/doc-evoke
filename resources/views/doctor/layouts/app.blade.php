@@ -51,7 +51,10 @@
   <body>
     <!-- Content -->
 
-   @yield('doctor.content')
+
+    @include('doctor.partisals.breadcrumb')
+
+    @yield('doctor.content')
 
 
 

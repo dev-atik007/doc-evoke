@@ -14,7 +14,8 @@ class AdminController extends Controller
     public function dashboard()
     {
         $pageTitle = 'Dashboard';
-        return view('admin.dashboard', compact('pageTitle'));
+        $admin = auth()->guard('admin')->user();
+        return view('admin.dashboard', compact('pageTitle', 'admin'));
     }
 
     public function profile()
@@ -59,6 +60,7 @@ class AdminController extends Controller
         $admin = auth('admin')->user();
         return view('admin.password', compact('admin', 'pageTitle'));
     }
+    
 
     public function passwordUpdate(Request $request)
     {

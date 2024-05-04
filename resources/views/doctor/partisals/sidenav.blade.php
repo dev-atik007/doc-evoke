@@ -17,12 +17,12 @@
 
     <ul class="menu-sub">
       <li class="menu-item">
-        <a href="" class="menu-link">
+        <a href="{{ route('doctor.appointment.booking') }}" class="menu-link">
           <div data-i18n="Without menu">Make Appointment</div>
         </a>
       </li>
       <li class="menu-item">
-        <a href="" class="menu-link">
+        <a href="{{ route('doctor.appointment.index') }}" class="menu-link">
           <div data-i18n="Without navbar">New Appointments</div>
         </a>
       </li>
@@ -54,7 +54,7 @@
 
     <ul class="menu-sub">
       <li class="menu-item">
-        <a href="" class="menu-link">
+        <a href="{{ route('doctor.profile') }}" class="menu-link">
           <div data-i18n="Without menu">Profile</div>
         </a>
       </li>

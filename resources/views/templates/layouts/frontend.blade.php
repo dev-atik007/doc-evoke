@@ -26,15 +26,19 @@
   <link href="{{ asset('public/templates/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('public/templates/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+  @stack('style-lib')
+
+  @stack('style')
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('public/templates/assets/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
-      @include('templates.partials.topBar')
+  @include('templates.partials.topBar')
 
-       @include('templates.partials.header')
+  @include('templates.partials.header')
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
@@ -44,14 +48,14 @@
       <a href="#about" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero -->
-  
+
   <main id="main">
 
     @include('templates.partials.why_choose')
-    
+
 
     @include('templates.partials.about')
-    
+
 
     @include('templates.partials.count_section')
 
@@ -66,15 +70,15 @@
 
     @include('templates.partials.doctors')
 
-  
+
     @include('templates.partials.faq_section')
-    
+
 
     @include('templates.partials.testimonials_section')
 
 
     @include('templates.partials.gallery')
-    
+
 
     @include('templates.partials.map')
 
@@ -82,7 +86,7 @@
 
   </main><!-- End #main -->
 
-    @include('templates.partials.footer')
+  @include('templates.partials.footer')
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -96,6 +100,12 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('public/templates/assets/js/main.js') }}"></script>
+
+  @stack('script-lib')
+
+  @stack('script')
+
+  @include('partials.notify')
 
 </body>
 

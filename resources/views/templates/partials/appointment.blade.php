@@ -29,19 +29,17 @@
             </div>
             <div class="col-md-4 form-group mt-3">
               <select name="department" id="department" class="form-select">
-                <option value="">Select Department</option>
-                <option value="Department 1">Department 1</option>
-                <option value="Department 2">Department 2</option>
-                <option value="Department 3">Department 3</option>
+                <option value="" selected disabled>Select Department</option>
+                
+                @foreach ($departments as $d)
+                  <option value="{{$d->id}}" data-doctors="{{ $d->doctors }}">{{$d->name}}</option>
+                @endforeach
               </select>
               <div class="validate"></div>
             </div>
             <div class="col-md-4 form-group mt-3">
               <select name="doctor" id="doctor" class="form-select">
                 <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
               </select>
               <div class="validate"></div>
             </div>
@@ -61,3 +59,11 @@
 
       </div>
     </section><!-- End Appointment Section -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $('[name=department]').on('change', function() {
+        let doctors = $(this).data('doctors');
+        console.log(doctors);
+      });
+    </script>

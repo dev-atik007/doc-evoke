@@ -14,7 +14,8 @@ class ScheduleController extends Controller
     {
         $pageTitle = 'Manage Schedule';
         $doctor    = auth()->guard('doctor')->user(); 
-        return view('doctor.schedule.index', compact('pageTitle'));
+        $slots = is_array($doctor->serial_or_slot) ? $doctor->serial_or_slot : explode(',', $doctor->serial_or_slot);
+        return view('doctor.schedule.index', compact('pageTitle', 'doctor', 'slots'));
     }
 
     public Function update(Request $request)

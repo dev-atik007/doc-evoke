@@ -15,6 +15,11 @@ function verificationCode($lenght)
     return random_int($min, $max);
 }
 
+function slug($string)
+{
+    return Illuminate\Support\Str::slug($string);
+}
+
 function keyToTitle($text)
 {
     return ucfirst(preg_replace("/^A-Za-Z0-9/", ' ', $text));
@@ -86,6 +91,7 @@ function getPaginate($paginate = 20)
 {
     return $paginate;
 }
+
 function paginateLinks($data)
 {
     return $data->appends(request()->all())->links();
