@@ -11,8 +11,6 @@ use App\Models\Doctor;
 use App\Traits\GlobalStatus;
 
 
-
-
 class ManageAssistantsController extends Controller
 {
     public function index()
@@ -127,6 +125,11 @@ class ManageAssistantsController extends Controller
         $assistant->mobile      = $mobile;
         $assistant->address     = $request->address;
         $assistant->save();
+
+        if ($doctors)
+        {
+            $assistant->doctors()->sync($doctors->pluck('id'));
+        }
         
     }
 

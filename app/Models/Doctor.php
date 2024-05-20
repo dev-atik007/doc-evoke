@@ -17,6 +17,11 @@ class Doctor extends Authenticatable
 
     protected $guarded = ['id'];
 
+    public function AssistantDoctorTrack()
+    {
+        return $this->hasMany(AssistantDoctorTrack::class);
+    }
+
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -30,6 +35,18 @@ class Doctor extends Authenticatable
     {
         return $this->hasMany(Appointment::class);
     }
+    
+    public function isCompleteappointments()
+    {
+        return $this->hasMany(Appointment::class)->where('is_complete',1);
+    }
+
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
+
+    
 
     public function statusBadge($status)
     {

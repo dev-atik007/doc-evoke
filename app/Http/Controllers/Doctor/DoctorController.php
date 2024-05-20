@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,7 @@ class DoctorController extends Controller
 {
     public function dashboard()
     {
+
         $pageTitle = 'Doctor Dashboard';
         $doctor = auth()->guard('doctor')->user();
         return view('doctor.dashboard', compact('pageTitle', 'doctor'));

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\FrontendController;
+use App\Models\BannerSection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -96,12 +97,21 @@ Route::middleware('admin')->group(function () {
         Route::get('booking/availability/date', 'availability')->name('available.date');
         Route::post('store/{id}', 'store')->name('store');
 
-
-        //Appointment
-
     });
 
 
+    Route::controller('SiteController')->prefix('frontend')->name('frontend.')->group(function () {
 
+        // Banner Section
+        Route::get('banner-section', 'BannerSection')->name('banner.section');
+        Route::post('banner-store/{id?}', 'bannerStore')->name('banner.section.store');
+        Route::post('banner-section/{id}', 'bannerUpdate')->name('banner.update');
+
+        // Emergency Contact
+        Route::get('emergency-contact', 'contact')->name('emergency.contact');
+        Route::post('contact-update/{id}', 'contactUpdate')->name('contact.update');
+    });
+
+    
 
 });

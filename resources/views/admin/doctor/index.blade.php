@@ -26,7 +26,8 @@
                             <a href=""><span>@</span>{{ $doctor->username }}</a>
                         </small>
                     </td>
-                    <td><span>{{ $general->country_code . $doctor->mobile }}</span>{{ $doctor->email }}</td>
+                    <td><span>{{ $general->country_code . $doctor->mobile }}</span> <br>
+                    {{ $doctor->email }}</td>
                     <td>100 {{ $general->cur_text }}</td>
                     <td>
                         <span>{{ $doctor->department->name }} </span>

@@ -18,14 +18,45 @@
                 </tr>
             </thead>
             <tbody>
-                
+                @forelse ($appointments as $key=>$appointment)
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>{{ $appointment->name }} <br> {{ $appointment->mobile }}</td>
+                        <td>{{ $appointment->doctor->name }}</td>
+                        <td>@php echo $appointment->addedByBadge; @endphp</td>
+                        <td>{{ showDateTime($appointment->booking_date) }}</td>
+                        <td>{{ $appointment->time_serial }}</td>
+                        <td>@php echo $appointment->paymentBadge; @endphp</td>
+                        <td>@php echo $appointment->serviceBadge; @endphp</td>
+                        <td>
+                        <div class="button--group">
+                            <button class="btn btn-sm btn-outline--primary detailBtn"  data-appoinment-done="{{ route('doctor.appointment.done', $appointment->id) }}" data-resourse="{{ $appointment }}">
+                                <i class="las la-desktop"></i> Details
+                            </button>
+
+
+                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="" data-question="@lang('Are you sure to remove this appointment')?">
+                                <i class="la la-trash"></i> @lang('Trash')
+                            </button>
+
+                        </div>
+                    </td>
+                    </tr>
+                @empty
+                    
+                @endforelse
             </tbody>
         </table>
-    </div>
-    <div class="p-4">
-       
+        @if (@$appointments->hasPages())
+                <div class="card-footer py-4">
+                    @php echo paginateLinks(@$appointments) @endphp
+                </div>
+            @endif
     </div>
 </div>
+
+    @include('doctor.appointment.appointment_modal')
+    
 @endsection
 
 @push('breadcrumb-plugins')

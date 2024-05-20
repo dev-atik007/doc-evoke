@@ -79,6 +79,9 @@ class FileInfo
             'path'      =>'assets/images/maintenance',
             'size'      =>'700x400',
         ];
+        $data['banner'] = [
+            'path'      =>'assets/images/banner'
+        ];
 
         return $data;
 	}

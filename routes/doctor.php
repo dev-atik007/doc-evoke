@@ -34,6 +34,12 @@ Route::middleware('doctor')->group(function () {
         Route::get('booking', 'booking')->name('booking');
         Route::get('booked/date', 'availability')->name('available.date');
         Route::post('store/{id}', 'store')->name('store');
+   
+
+        Route::post('dealing/{id}', 'done')->name('dealing');
+        Route::get('doctor/appointment/completed/', 'appointmentCompleted')->name('completed');
+        Route::post('service/done/{id}', 'doneService')->name('done');
+        
         
     });
 });

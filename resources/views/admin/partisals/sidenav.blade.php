@@ -1,39 +1,38 @@
-<li class="menu-item">
+<li class="menu-item @if(request()->routeIs('admin.dashboard')) active @endif">
   <a href="{{ route('admin.dashboard') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-collection"></i>
     <div data-i18n="Basic">Dashboard</div>
   </a>
 </li>
 
-<li class="menu-item">
+<li class="menu-item @if(request()->routeIs('admin.department.index')) active @endif">
   <a href="{{ route('admin.department.index') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-collection"></i>
     <div data-i18n="Basic">Departments</div>
   </a>
 </li>
 
-<li class="menu-item">
+<li class="menu-item @if (request()->routeIs('admin.department.location')) active @endif">
   <a href="{{ route('admin.department.location') }}" class="menu-link">
     <i class="menu-icon fa-solid fa-location-dot"></i>
     <div data-i18n="Basic">Locations</div>
   </a>
 </li>
 
-
 <!-- Appoinments -->
-<li class="menu-item">
+<li class="menu-item @if(request()->routeIs('admin.appointment*')) open active @endif">
   <a href="javascript:void(0);" class="menu-link menu-toggle">
     <i class="menu-icon tf-icons bx bx-layout"></i>
     <div data-i18n="Layouts">Appoinments</div>
   </a>
 
   <ul class="menu-sub">
-    <li class="menu-item">
+    <li class="menu-item @if (request()->routeIs('admin.appointment.form') active @endif">
       <a href="{{ route('admin.appointment.form') }}" class="menu-link">
         <div data-i18n="Without menu">Make Appointment</div>
       </a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item @if (request()->routeIs('admin.appointment.index') active @endif">
       <a href="{{ route('admin.appointment.index') }}" class="menu-link">
         <div data-i18n="Without navbar">New Appointments</div>
       </a>
@@ -297,8 +296,8 @@
 <!-- Report end -->
 
 <!-- Subscribe -->
-<li class="menu-item">
-  <a href="" class="menu-link">
+<li class="menu-item @if(request()->routeIs('subscribe')) active @endif">
+  <a href="{{ route('subscribe') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-collection"></i>
     <div data-i18n="Basic">Subscribers</div>
   </a>
@@ -392,44 +391,44 @@
 </li>
 
 <li class="menu-item">
-  <a href="" class="menu-link">
+  <a href="{{ route('description') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-support"></i>
-    <div data-i18n="Support">Manage Templates</div>
+    <div data-i18n="Support">Manage Description</div>
   </a>
 </li>
 
 <li class="menu-item">
-  <a href="" class="menu-link">
+  <a href="{{ route('contact.index') }}" class="menu-link">
     <i class="menu-icon tf-icons bx bx-support"></i>
-    <div data-i18n="Support">Manage Pages</div>
+    <div data-i18n="Support">Contact Form</div>
   </a>
 </li>
 
-<li class="menu-item">
+<li class="menu-item @if(request()->routeIs('admin.frontend*')) open active @endif">
   <a href="javascript:void(0);" class="menu-link menu-toggle">
     <i class="menu-icon tf-icons bx bx-layout"></i>
     <div data-i18n="Layouts">Manage Section</div>
   </a>
 
-  <ul class="menu-sub">
-    <li class="menu-item">
-      <a href="layouts-without-menu.html" class="menu-link">
+  <ul class="menu-sub @if (request()->routeIs('admin.frontend.banner.section') active @endif">
+    <li class="menu-item ">
+      <a href="{{ route('admin.frontend.banner.section') }}" class="menu-link">
         <div data-i18n="Without menu">Banner Section</div>
       </a>
     </li>
-    <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Blog Section</div>
+        <li class="menu-item @if (request()->routeIs('admin.frontend.emergency.contact') active @endif">
+      <a href="{{ route('admin.frontend.emergency.contact') }}" class="menu-link">
+        <div data-i18n="Without navbar">Contact Us</div>
+      </a>
+    </li>
+    <li class="menu-item @if (request()->routeIs('footer.info') active @endif">
+      <a href="{{ route('footer.info') }}" class="menu-link">
+        <div data-i18n="Without navbar">Footer</div>
       </a>
     </li>
     <li class="menu-item">
       <a href="layouts-without-navbar.html" class="menu-link">
         <div data-i18n="Without navbar">Breadcrubm Section</div>
-      </a>
-    </li>
-    <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Contact Us</div>
       </a>
     </li>
     <li class="menu-item">
@@ -470,11 +469,6 @@
     <li class="menu-item">
       <a href="layouts-without-navbar.html" class="menu-link">
         <div data-i18n="Without navbar">Social Icons</div>
-      </a>
-    </li>
-    <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Subscribe Section</div>
       </a>
     </li>
     <li class="menu-item">

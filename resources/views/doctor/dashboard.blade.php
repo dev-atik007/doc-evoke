@@ -1,9 +1,7 @@
-@extends('doctor.layouts.master')
-@section('content')
+@extends('doctor.layouts.abc')
+@section('panel')
 
-<h4 class="py-3 mb-4">
-  <b>Dashboard</b>
-</h4>
+
 
 <div class="row">
   <div class="col-sm-6 col-lg-3 mb-4">

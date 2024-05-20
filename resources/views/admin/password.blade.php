@@ -7,7 +7,6 @@
             <div class="card-body p-0">
                 <div class="d-flex p-3 bg--primary">
                     <div class="avatar avatar--lg">
-
                     </div>
                     <div class="ps-3">
                         <h4 class="text--white">{{ $admin->name }}</h4>

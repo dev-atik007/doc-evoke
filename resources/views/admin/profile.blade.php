@@ -8,7 +8,7 @@
             <div class="card-body p-0">
                 <div class="d-flex p-3 bg--primary align-items-center">
                     <div class="avatar avatar--lg">
-                        <img src="url({{ getImage(getFilePath('adminProfile').'/'.@$admin->image,getFileSize('adminProfile')) }})" alt="">
+                        <img src="{{ getImage(getFilePath('adminProfile').'/'.@$admin->image,getFileSize('adminProfile')) }}" alt="">
                     </div>
                     <div class="ps-3">
                         <h4 class="text--white">{{ $admin->name }}</h4>

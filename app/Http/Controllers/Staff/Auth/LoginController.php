@@ -48,8 +48,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        // dd(Hash::make('staff'));
         $pageTitle = "Staff Login";
+       
         return view('staff.auth.login', compact('pageTitle'));
     }
 
@@ -70,15 +70,16 @@ class LoginController extends Controller
  
     public function login(Request $request) 
     {
+        //  dd(Hash::make('stff'));
         // dd($request->all());
         $this->validateLogin($request);
-
+        
         if ($this->attemptLogin($request)) {
+            
             return $this->sendLoginResponse($request);
         }
 
-        return $this->sendFailedLoginResponse($request);
-
+        return ($this->sendFailedLoginResponse($request));
     }
     
     public function logout(Request $request)
@@ -86,5 +87,6 @@ class LoginController extends Controller
         $this->guard('staff')->logout();
         $request->session()->invalidate();
         return $this->loggedOut($request) ?: redirect()->route('staff.login');
+
     }
 }

@@ -25,7 +25,7 @@
                     <td>{{ $department->name }} </td>
                     <td>{{ Str::limit ($department->details, 30) }}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-label-primary editBtn" data-resource="" data-image="" data-action="">
+                        <button type="button" class="btn btn-sm btn-label-primary editBtn" data-info="{{ $department }}" data-resource="" data-image="">
                             <span class="btn btn-primary btn-sm">Edit</span>
                         </button>
                     </td>
@@ -178,25 +178,13 @@
         });
 
         $('.editBtn').on('click', function() {
+            let info = $(this).data('info');
+            // console.log('info');
+
+            editModal.find('[name=name]').val(info.name);
+            editModal.find('[name=details]').val(info.details);
             editModal.modal("show");
         })
-
-
-        $('.editBtn').on('click', function() {
-            $('#cuModal').find('[name=image]').removeAttr('required');
-            $('#cuModal').find('[name=image]').closest('.form-group').find('label').first().removeClass('required');
-        });
-
-
-
-        $('#editBtn').on('hidden.bs.modal', function() {
-            $('#cuModal').find('.profilePicPreview').css({
-                'background-image': `url(${placeHolderImage})`
-            });
-            $('#cuModal').find('[name=image]').attr('required', 'required');
-            $('#cuModal').find('[name=image]').closest('.form-group').find('label').first().addClass('required');
-        });
-
     })(jQuery);
 </script>
 @endpush

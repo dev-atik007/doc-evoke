@@ -14,8 +14,7 @@ class AppointmentController extends Controller
     public function index()
     {
         $pageTitle = 'All New Appointments';
-        $appointments = Appointment::newAppointment()->with('staff', 'doctor', 'assistant')->latest();
-        $appointments = $this->detectUserType($appointments);
+        $appointments = Appointment::get();
         return view('admin.appointment.index', compact('pageTitle', 'appointments'));
     }
 
@@ -84,17 +83,7 @@ class AppointmentController extends Controller
         $appointment->doctor_id     = $doctor->id;
         $appointment->disease       = $request->disease;
 
-        if (auth()->guard('admin')->id() == 'admin') {
-            $appointment->added_admin_id = 1;
-        } elseif (auth()->guard('doctor')->id() == 'doctor') {
-            $appointment->added_doctor_id = auth()->guard('doctor')->id();
-        } elseif (auth()->guard('staff')->id() == 'staff') {
-            $appointment->added_staff_id = auth()->guard('staff')->id();
-        } elseif (auth()->guard('assistant')->id() == 'assistant') {
-            $appointment->added_assistant_id = auth()->guard('assistant')->id();
-        } else {
-            $appointment->site = Status::YES;
-        }
+        $appointment->added_admin_id = auth()->guard('admin')->id();
 
         $appointment->save();
 

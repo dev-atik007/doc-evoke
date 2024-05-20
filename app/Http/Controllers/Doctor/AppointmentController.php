@@ -12,12 +12,11 @@ use Illuminate\Http\Request;
 class AppointmentController extends Controller
 {
    
-
     public function index()
     {
         $pageTitle = 'All New Appointment';
-        $appointments = Appointment::newAppointment()->with('staff', 'doctor', 'assistant');
-        $appointments = $this->detectUserType($appointments);
+        $doctor = auth()->guard('doctor')->user();
+        $appointments = Appointment::where('doctor_id', $doctor->id)->latest()->with('doctor')->paginate(getPaginate(5));
         return view('doctor.appointment.index', compact('pageTitle', 'appointments'));
     }
 
@@ -58,9 +57,7 @@ class AppointmentController extends Controller
     {
         $this->validation($request);
 
-
         $doctor = Doctor::find($id);
-
         $general = gs();
         $mobile = $general->country_code . $request->mobile;
 
@@ -74,17 +71,7 @@ class AppointmentController extends Controller
         $appointment->doctor_id     = $doctor->id;
         $appointment->disease       = $request->disease;
 
-        if (auth()->guard('admin')->id() == 'admin') {
-            $appointment->added_admin_id = 1;
-        } elseif (auth()->guard('doctor')->id() == 'doctor') {
-            $appointment->added_doctor_id = auth()->guard('doctor')->id();
-        } elseif (auth()->guard('staff')->id() == 'staff') {
-            $appointment->added_staff_id = auth()->guard('staff')->id();
-        } elseif (auth()->guard('assistant')->id() == 'assistant') {
-            $appointment->added_assistant_id = auth()->guard('assistant')->id();
-        } else {
-            $appointment->site = Status::YES;
-        }
+        $appointment->added_doctor_id = auth()->guard('doctor')->id();
 
         $appointment->save();
         
@@ -108,6 +95,59 @@ class AppointmentController extends Controller
             ]
         );
     }
+
+    public function done($id)
+    {
+        $appointment = Appointment::findOrFail();
+
+        if ($appointment->is_complete == Status::APPOINTMENT_INCOMPLETE && $appointment->payment_status != Status::APPOINTMENT_PAID_PAYMENT) {
+            $appointment->is_complete == Status::APPOINTMENT_COMPLETE;
+
+            if ($appointment->payment_status == Status::APPOINTMENT_CASH_PAYMENT) {
+                $doctor = Doctor::findOrFail($appointment->doctor->id);
+                $doctor->balance += $doctor->fees;
+                $doctor->save();
+                $appointment->payment_status = Status::APPOINTMENT_PAID_PAYMENT;
+            }
+
+            $appointment->save();
+            $notify[] = ['success', 'Appointed service is done successfully'];
+            return back()->withNotify($notify);
+        } else {
+            $notify[] = ['error', 'Something is wrong!'];
+            return back()->withNotify($notify);
+        }
+    }
+    
+
+    public function appointmentCompleted()
+    {
+        // $doctor = Doctor::with(['appointments'=>function($query) {
+        //     $query->where('is_complete',1)->get();
+        // }])->where('id', $id)->first();
+
+        $doctor = auth()->guard('doctor')->user();
+         $appointments = $doctor->isCompleteappointments;
+// dd($doctor);
+        $pageTitle = 'Done Appointment';
+        return view('doctor.appointment.doneService', compact('pageTitle','appointments'));
+    }
+
+    public function doneService(Request $request, $id)
+    {
+        $appointment = Appointment::findOrFail();
+        $appointment->is_complete = 1;
+        $appointment->payment_status = 1;
+        $appointment->save();
+
+        $pageTitle      = 'Done Appointments';
+        $notify[] = ['success', 'Appoinment Success'];
+        return back()->withNotify($notify);
+    }
+
+   
+   
+   
 
     
 }

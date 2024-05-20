@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Assistant;
+use App\Models\Department;
+use App\Models\Doctor;
+use App\Models\GeneralSetting;
+use App\Models\Location;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use App\Rules\FileTypeValidate;
 use Illuminate\Support\Facades\Hash;
@@ -15,8 +22,22 @@ class AdminController extends Controller
     {
         $pageTitle = 'Dashboard';
         $admin = auth()->guard('admin')->user();
-        return view('admin.dashboard', compact('pageTitle', 'admin'));
+
+        $total_doctor           = Doctor::all()->count();
+        $total_staff            = Staff::all()->count();
+        $total_assistant        = Assistant::all()->count();
+        $total_department       = Department::all()->count();
+        $total_location         = Location::all()->count();
+        $total_new_appointments = Appointment::where('is_complete',0)->count();
+        // dd($total_new_appointments);
+        $total_done_appointments= Appointment::where('is_complete',1)->count();
+        // dd($total_done_appointments);
+        return view('admin.dashboard', compact('pageTitle', 'admin', 'total_doctor', 'total_staff', 'total_assistant',
+            'total_department', 'total_location', 'total_new_appointments', 'total_done_appointments'));
     }
+
+    // $total_doctor = Doctor::all()->count();
+    //     $total_department = Department::all()->count();
 
     public function profile()
     {
@@ -52,8 +73,6 @@ class AdminController extends Controller
         return to_route('admin.profile')->withNotify($notify);
     }
 
-
-
     public function password()
     {
         $pageTitle = 'Password';
@@ -61,7 +80,6 @@ class AdminController extends Controller
         return view('admin.password', compact('admin', 'pageTitle'));
     }
     
-
     public function passwordUpdate(Request $request)
     {
         $this->validate($request, [
@@ -79,4 +97,5 @@ class AdminController extends Controller
         $notify[] = ['success', 'Password changed successfully.'];
         return to_route('admin.password')->withNotify($notify);
     }
+    
 }

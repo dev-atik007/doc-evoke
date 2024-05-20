@@ -56,7 +56,7 @@
                         </td>
                     </tr>
                 @empty
-                    
+                <td class="text-muted text-center" colspan="100">$emptyMessage</td>
                 @endforelse
             </tbody>
         </table>

@@ -1,5 +1,5 @@
-@extends('staff.layouts.master')
-@section('content')
+@extends('staff.layouts.abc')
+@section('panel')
 
 <div class="row">
     <div class="col-lg-8 mb-4 order-0">
@@ -7,7 +7,7 @@
         <div class="d-flex align-items-end row">
           <div class="col-sm-7">
             <div class="card-body">
-              <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+              <h5 class="card-title text-primary">TTTTTTTTTTTTTTTTTTTTTTT</h5>
               <p class="mb-4">
                 You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
                 your profile.

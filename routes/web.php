@@ -21,7 +21,25 @@ Route::get('/', [FrontendController::class, 'templates'])->name('templates');
 Route::get('/single-fullwidth-doctor', [FrontendController::class, 'singleDoctor'])->name('single.doctor');
 
 
+Route::controller('Admin\SiteController')->group(function() {
+    //Subscirbe
+    Route::get('subscribe', 'subscribe')->name('subscribe');
+    Route::post('user-subscribe', 'userSubscribe')->name('user.subscribe');
 
+    //footer section
+    Route::get('footer-details', 'info')->name('footer.info');
+    Route::post('footer.section/{id}', 'footerSection')->name('footer.section');
+    
+    // forms Contact
+    Route::get('contact-form', 'index')->name('contact.index');
+    Route::post('contactdata/user', 'contactFormUser')->name('form.contact.user');
+    Route::get('contact-data-delete/{id}', 'delete')->name('data.delete');
 
+    //Google Map
+    Route::post('google-map', 'map')->name('google.map');
 
+    Route::get('section-all', 'description')->name('description');
+    Route::post('section-description/update/{id}', 'sectionUpdate')->name('section.update');
 
+    
+});

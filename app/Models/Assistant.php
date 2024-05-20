@@ -12,6 +12,11 @@ class Assistant extends Authenticatable
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function doctors()
+    {
+        return $this->belongsToMany(Doctor::class, 'assistant_doctor_tracks')->with('department', 'location')->withTimestamps();
+    }
+
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);

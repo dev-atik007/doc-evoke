@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Template - Index</title>
+  <title>{{ $general->siteName($pageTitle ?? '') }}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -32,6 +32,13 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('public/templates/assets/css/style.css') }}" rel="stylesheet">
+  
+  <style>
+    #hero {
+    background: url("public/assets/admin/images/profile/{{ $bannerSections->image }}") top center;
+
+  }
+  </style>
 </head>
 
 <body>
@@ -43,8 +50,8 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
-      <h1>Welcome to Medilab</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
+      <h1>{{ $bannerSections->heading }}</h1>
+      <h2>{{ $bannerSections->subheading }}</h2>
       <a href="#about" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero -->

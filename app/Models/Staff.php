@@ -15,6 +15,13 @@ class Staff extends Authenticatable
         return $this->hasMany(Appointment::class, 'staff');
     }
 
+    // public function doctors()
+    // {
+    //     return $this->belongsTo(Doctor::class);
+    // }
+
+
+   
     public function statusBadge($status)
     { 
         $html = '';
