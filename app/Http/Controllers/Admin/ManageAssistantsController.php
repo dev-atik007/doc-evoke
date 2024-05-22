@@ -115,6 +115,7 @@ class ManageAssistantsController extends Controller
                 return back()->withNotify($notify);
             }
         }
+        
         $general = gs();
         $mobile = $general->country_code . $request->mobile;
 

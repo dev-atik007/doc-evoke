@@ -162,7 +162,4 @@ class ManageDoctorsController extends Controller
         return view('admin.doctor.detail', compact('pageTitle'));
     }
 
-
-   
-
 }

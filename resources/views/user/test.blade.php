@@ -29,7 +29,7 @@
                       <p>{{ $department->about }}</p>
                     </div>
                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                      <img src="{{ getImage(getFilePath('department') . '/' . $department->image, getFileSize('department')) }}" alt="" class="img-fluid">
+                      <img src="{{ asset('public/templates/assets/img/departments-1.jpg') }}" alt="" class="img-fluid">
                     </div>
                   </div>
                 </div>

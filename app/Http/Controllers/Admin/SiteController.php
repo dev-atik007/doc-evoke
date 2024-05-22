@@ -8,6 +8,7 @@ use App\Models\ContactForm;
 use App\Models\Description;
 use App\Models\footer;
 use App\Models\subscribe;
+use App\Models\Testimonial;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
 
@@ -179,6 +180,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
+    
     public function description()
     {
         $pageTitle = 'All footer description';
@@ -213,7 +215,133 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
-    
+    public function image()
+    {
+        $pageTitle = 'Image';
+        return view('admin.frontend.doctor_image.image', compact('pageTitle'));
+    }
 
-    
+
+    public function testimonials()
+    {
+        $pageTitle = 'Testimonial List';
+        $testination = Testimonial::latest()->get();
+        return view('admin.frontend.testimonials.index', compact('pageTitle', 'testination'));
+    }
+
+    public function testinationForm()
+    {
+        $pageTitle = 'Testinations Form';
+        return view('admin.frontend.testimonials.form', compact('pageTitle'));
+    }
+
+    public function store(Request $request,$id = 0)
+    {
+        $this->validation($request, $id);
+
+        if ($id) {
+            $testination     = Testimonial::findOrFail($id);
+            $notification   = 'Department updated successfully';
+        } else {
+            $testination     = new Testimonial();
+            $notification   = 'Department Added Successfully';
+        }
+
+        if($request->hasFile('image')) {
+      
+            try {
+                $testination->image = fileUploader($request->image, getFilePath('testimonial'), getFileSize('testimonial'), @$testination->image);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload category image'];
+                return back()->withNotify($notify);
+            } 
+        }
+
+
+        $testination->name          = $request->name;
+        $testination->destination   = $request->destination;
+        $testination->description   = $request->description;
+        $testination->save();
+
+        $notify[] = ['success', 'Testination data successfully uploded!'];
+        // return redirect()->back()->withNotify($notify);
+        return to_route('testimonials')->withNotify($notify);
+        
+    }
+
+    protected function validation($request, $id =0)
+    {
+        $imageValidation = $id ? 'nullabe' : 'required';
+        $request->validate(
+            [
+                'image'         => ["$imageValidation", 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+                'name'          => 'required|string|max:40',
+                'destination'   => 'required|string|max:100',
+                'description'   => 'required|string',
+            ],
+        );
+    }
+
+    public function testimonialsUpdate(Request $request, $id)
+    {
+        $this->Updatevalidation($request, $id);
+
+        $testimonial = Testimonial::find($id);
+
+        if ($id) {
+            $testimonial     = Testimonial::findOrFail($id);
+            $notification   = 'Department updated successfully';
+        } else {
+            $testimonial     = new Testimonial();
+            $notification   = 'Department Added Successfully';
+        }
+
+        if($request->hasFile('image')) {
+      
+            try {
+                $testimonial->image = fileUploader($request->image, getFilePath('testimonial'), getFileSize('testimonial'), @$testimonial->image);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Couldn\'t upload category image'];
+                return back()->withNotify($notify);
+            } 
+        }
+
+        $testimonial->name          = $request->name;
+        $testimonial->destination   = $request->destination;
+        $testimonial->description   = $request->description;
+        $testimonial->save();
+
+        $notify[] = ['success', 'Testination data successfully updated!'];
+        return redirect()->back()->withNotify($notify);
+        
+    }
+
+    protected function Updatevalidation($request, $id)
+    {
+        $imageValidation = $id ? 'nullabe' : 'required';
+        $request->validate(
+            [
+                'image'         => ["$imageValidation", 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+                'name'          => 'required|string|max:40',
+                'destination'   => 'required|string|max:100',
+                'description'   => 'required|string',
+            ]
+        );
+    }
+
+    public function testimonialsDelete($id)
+    {
+        $delete = Testimonial::find($id);
+        if ($delete) {
+            $delete->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
+
+        $notify[] = ['success', 'Data delete successfully!'];
+        return redirect()->back()->withNotify($notify);
+    }
+
+  
 }

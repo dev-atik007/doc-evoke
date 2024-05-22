@@ -10,6 +10,7 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Details</th>
+                    <th>About</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                     </td>
                     <td>{{ $department->name }} </td>
                     <td>{{ Str::limit ($department->details, 30) }}</td>
+                    <td>{{ Str::limit ($department->about, 30) }}</td>
                     <td>
                         <button type="button" class="btn btn-sm btn-label-primary editBtn" data-info="{{ $department }}" data-resource="" data-image="">
                             <span class="btn btn-primary btn-sm">Edit</span>
@@ -89,6 +91,10 @@
                                 <label>@lang('Details')</label>
                                 <textarea name="details" rows="10" class="form-control" required></textarea>
                             </div>
+                            <div class="form-group">
+                                <label>@lang('About')</label>
+                                <textarea name="about" rows="10" class="form-control" required></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,6 +150,10 @@
                             <label>Details</label>
                             <textarea name="details" rows="10" class="form-control" required></textarea>
                         </div>
+                        <div class="form-group">
+                            <label>About</label>
+                            <textarea name="about" rows="10" class="form-control" required></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -183,6 +193,7 @@
 
             editModal.find('[name=name]').val(info.name);
             editModal.find('[name=details]').val(info.details);
+            editModal.find('[name=about]').val(info.about);
             editModal.modal("show");
         })
     })(jQuery);

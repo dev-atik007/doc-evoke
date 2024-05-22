@@ -27,14 +27,13 @@
   <link rel="stylesheet" href="{{ asset('public/admin/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
   <link rel="stylesheet" href="{{ asset('public/admin/assets/vendor/fonts/boxicons.css') }}" />
   <script src="{{ asset('public/admin/assets/vendor/js/helpers.js') }}"></script>
-   <!-- font awesome cdn -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="{{ asset('public/admin/assets/js/config.js') }}"></script>
   <!-- font awesome cdn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <!-- icon piker cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.min.css">
   @stack('style-lib')
 
   <link rel="stylesheet" href="{{ asset('public/admin/assets/css/vendor/select2.min.css') }}" />
@@ -153,6 +152,13 @@
   <script src="{{ asset('public/admin/assets/js/main.js') }}"></script>
 
   @include('partials.notify')
+<!-- Font Awesome Icon Picker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
+    <script>
+        $(function() {
+            $('.icon-picker').iconpicker();
+        });
+    </script>
 
 
   <script src="{{ asset('public/admin/assets/js/dashboards-analytics.js') }}"></script>

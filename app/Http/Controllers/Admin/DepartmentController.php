@@ -14,7 +14,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $pageTitle = 'All Departments';
-        $departments = Department::paginate(getPaginate(2));
+        $departments = Department::latest()->paginate(getPaginate(7));
         return view('admin.department.index', compact('pageTitle', 'departments'));
     }
 
@@ -25,6 +25,7 @@ class DepartmentController extends Controller
         $request->validate([
             'name'      => 'required|unique:departments|max:40',
             'details'   => 'required|max:255',
+            'about'     => 'required',
             'image'     => ["$imageValidation", new FileTypeValidate(['jpg', 'png', 'jpeg'])],
         ]);
 
@@ -47,7 +48,9 @@ class DepartmentController extends Controller
 
         $department->name   = $request->name;
         $department->details = $request->details;
+        $department->about = $request->about;
         $department->save();
+
         $notify[] = ['success', $notification];
         return back()->withNotify($notify);
     }

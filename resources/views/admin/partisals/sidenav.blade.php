@@ -218,7 +218,14 @@
   </ul>
 </li>
 <!-- Staffs end -->
-
+<!-- Service -->
+<li class="menu-item @if(request()->routeIs('admin.service.index')) active @endif">
+  <a href="{{ route('admin.service.index') }}" class="menu-link">
+    <i class="menu-icon tf-icons bx bx-collection"></i>
+    <div data-i18n="Basic">Service</div>
+  </a>
+</li>
+<!-- end Service -->
 <!-- Payments Gateway -->
 <li class="menu-item">
   <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -427,8 +434,8 @@
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Breadcrubm Section</div>
+      <a href="{{ route('doctor.image') }}" class="menu-link">
+        <div data-i18n="Without navbar">Image Section</div>
       </a>
     </li>
     <li class="menu-item">
@@ -472,7 +479,7 @@
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
+      <a href="{{ route('testimonials') }}" class="menu-link">
         <div data-i18n="Without navbar">Testimonial Section</div>
       </a>
     </li>

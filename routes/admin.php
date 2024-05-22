@@ -89,6 +89,13 @@ Route::middleware('admin')->group(function () {
         Route::get('detail/{id}', 'detail')->name('detail');
     });
 
+    Route::controller('ServiceController')->prefix('service')->name('service.')->group(function() {
+        //Service
+        Route::get('index', 'index')->name('index');
+        Route::get('form', 'form')->name('form');
+        Route::post('store', 'serviceStore')->name('store');
+    });
+
     Route::controller('AppointmentController')->prefix('appointment')->name('appointment.')->group(function (){
         //Create Appointment
         Route::get('index', 'index')->name('index');
@@ -111,6 +118,8 @@ Route::middleware('admin')->group(function () {
         Route::get('emergency-contact', 'contact')->name('emergency.contact');
         Route::post('contact-update/{id}', 'contactUpdate')->name('contact.update');
     });
+
+
 
     
 

@@ -32,6 +32,9 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('public/templates/assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- icon piker cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/css/fontawesome-iconpicker.min.css">
   
   <style>
     #hero {
@@ -107,6 +110,14 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('public/templates/assets/js/main.js') }}"></script>
+
+  <!-- Font Awesome Icon Picker JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
+    <script>
+        $(function() {
+            $('.icon-picker').iconpicker();
+        });
+    </script>
 
   @stack('script-lib')
 

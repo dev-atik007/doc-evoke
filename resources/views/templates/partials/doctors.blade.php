@@ -8,76 +8,28 @@
         </div>
 
         <div class="row">
-
+        @foreach ($doctors as $doctor)
           <div class="col-lg-6">
             <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{{ asset('public/templates/assets/img/doctors/doctors-1.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ getImage(getFilePath('doctorProfile').'/'. $doctor->image,getFileSize('doctorProfile'))}}" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Medical Officer</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
+                
+                  <h4>{{ $doctor->name }}</h4>
+                  <span>{{ $doctor->department->name }}</span>
+                  <p>{{ $doctor->department->details }}</p>
+                  <div class="social">
+                    <a href=""><i class="ri-twitter-fill"></i></a>
+                    <a href=""><i class="ri-facebook-fill"></i></a>
+                    <a href=""><i class="ri-instagram-fill"></i></a>
+                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                  </div>
+                
               </div>
             </div>
           </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{{ asset('public/templates/assets/img/doctors/doctors-2.jpg') }}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Anesthesiologist</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{{ asset('public/templates/assets/img/doctors/doctors-3.jpg') }}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Cardiology</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{{ asset('public/templates/assets/img/doctors/doctors-4.jpg') }}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Neurosurgeon</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        @endforeach
         </div>
 
       </div>
+
     </section><!-- End Doctors Section -->

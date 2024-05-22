@@ -60,12 +60,13 @@ class FileInfo
         ];
         $data['department'] = [
             'path'      =>'assets/images/department',
-            'size'      =>'65x65',
+            'size'      =>'600x525',
         ];
-
+        
         $data['doctorProfile'] = [
             'path'      =>'assets/images/doctor',
-            'size'      =>'400x400',
+            'size'      =>'600x600',
+            //  px400x400
         ];
         $data['assistantProfile'] = [
             'path'      =>'assets/images/assistant',
@@ -81,6 +82,10 @@ class FileInfo
         ];
         $data['banner'] = [
             'path'      =>'assets/images/banner'
+        ];
+        $data['testimonial'] = [
+            'path'      =>'assets/images/testimonial',
+            'size'      =>'90x90',
         ];
 
         return $data;

@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+// Landing page
 Route::get('/', [FrontendController::class, 'templates'])->name('templates');
+
+
 Route::get('/single-fullwidth-doctor', [FrontendController::class, 'singleDoctor'])->name('single.doctor');
 
 
@@ -38,8 +40,16 @@ Route::controller('Admin\SiteController')->group(function() {
     //Google Map
     Route::post('google-map', 'map')->name('google.map');
 
+    // All Sections descriptions
     Route::get('section-all', 'description')->name('description');
     Route::post('section-description/update/{id}', 'sectionUpdate')->name('section.update');
 
-    
+    Route::get('doctor-image', 'image')->name('doctor.image');
+
+    // Testimonials Section
+    Route::get('testimonials', 'testimonials')->name('testimonials');
+    Route::get('testinations', 'testinationForm')->name('testination.form');
+    Route::post('testination/store/{id?}', 'store')->name('destination.store');
+    Route::post('/testimonials/update/{id}', 'testimonialsUpdate')->name('testimonials.update');
+    Route::get('testimonials/delete/{id}', 'testimonialsDelete')->name('testimonials.delete');
 });
