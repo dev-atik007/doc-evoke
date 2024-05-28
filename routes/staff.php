@@ -30,8 +30,5 @@ Route::middleware('staff')->group(function () {
         Route::get('details', 'details')->name('booking.details');
         Route::get('booking/availability/date', 'availability')->name('available.date');
         Route::post('store/data/{id}', 'store')->name('store');
-
     });
-    
-    
 });

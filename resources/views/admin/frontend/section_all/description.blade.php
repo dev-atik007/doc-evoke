@@ -11,6 +11,15 @@
                         <div class="col-md-12 col-sm-2"> 
                         <div class="form-group ">
                             <div class="form-group">
+                                <label>Why Choose</label>
+                                <textarea id="service" name="why_choose" class="form-control" cols="30" rows="4">{{ old('why_choose', $description->why_choose ?? '') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>About Section</label>
+                                <textarea id="service" name="about_section" class="form-control" cols="30" rows="4">{{ old('about_section', $description->about_section ?? '') }}</textarea>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label>Service</label>
                                 <textarea id="service" name="service" class="form-control" cols="30" rows="4">{{ old('service', $description->service ?? '') }}</textarea>
                             </div>

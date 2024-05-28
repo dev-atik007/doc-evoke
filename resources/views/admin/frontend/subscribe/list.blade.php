@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th>S.N</th>
-                    <th>Image</th> 
+                    <th>Email</th> 
                 </tr>
             </thead>
             <tbody class="">
@@ -17,7 +17,7 @@
                         <td>{{ $subscribe->email }}</td>
                     </tr>
                 @empty
-                    
+                    <h1>Data Not found</h1>
                 @endforelse
             </tbody>
         </table>

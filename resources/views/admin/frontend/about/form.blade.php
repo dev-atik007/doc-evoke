@@ -1,11 +1,10 @@
 @extends('admin.layouts.abc')
 @section('panel')
-
 <div class="row mb-none-30">
     <div class="col-lg-12 col-md-12 mb-30">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('admin.service.store') }}" method="POST">
+                <form action="{{ route('about.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="form-group">
@@ -15,15 +14,15 @@
 
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group ">
-                                <label>Title</label>
-                                <input class="form-control" type="text" name="title" required value="">
+                                <label>Name</label>
+                                <input class="form-control" type="text" name="name" required value="">
                             </div>
                         </div>
                         
                         <div class="col-md-12 col-sm-6">
                             <div class="form-group ">
-                                <label>Description</label>
-                                <input class="form-control" type="text" name="description" required value="">
+                                <label>About</label>
+                                <input class="form-control" type="text" name="about" required value="">
                             </div>
                         </div>
     
@@ -36,14 +35,10 @@
         </div>
     </div>
 </div>
-
-
-
 @endsection
 
 @push('breadcrumb-plugins')
-
-<a href="{{ route('admin.service.index') }}" type="button" class="btn btn-sm btn-outline--primary h-45">
+<a href="{{ route('about.section') }}" type="button" class="btn btn-sm btn-outline--primary h-45">
     <i class="las la-plus"></i> - Back
 </a>
 @endpush

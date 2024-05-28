@@ -16,7 +16,7 @@
                 <tr>
                     <td>1</td>
                     <td>
-                        <img src="{{ getImage(getFilePath('banner') . '/' . $bannerSection->image) }}" class="img-thumbnail rounded" style="width:50px" alt="@lang('Image')">
+                        <img src="{{ getImage(getFilePath('banner') . '/' . @$bannerSection->image) }}" class="img-thumbnail rounded" style="width:50px" alt="@lang('Image')">
                     </td>
                     <td>{{ $bannerSection->heading }}</td>
                     <td>{{ $bannerSection->subheading }}</td>

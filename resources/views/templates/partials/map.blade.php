@@ -1,5 +1,3 @@
-
-
 <!-- ======= Contact Section ======= -->
 <section id="contact" class="contact">
       <div class="container">
@@ -24,9 +22,8 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>{{ $footer_section->street }}, {{ $footer_section->city }}</p>
               </div>
-
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
@@ -68,8 +65,6 @@
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
-
         </div>
-
       </div>
     </section><!-- End Contact Section -->

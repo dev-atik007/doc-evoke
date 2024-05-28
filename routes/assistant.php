@@ -38,9 +38,5 @@ Route::middleware('assistant')->group(function () {
         Route::get('doctor/appointment/completed/{id}', 'appointmentCompleted')->name('completed');
         Route::post('service/done/{id}', 'doneService')->name('done');
         
-
-
     });
-
-
 });

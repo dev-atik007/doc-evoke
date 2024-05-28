@@ -55,7 +55,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ route('testimonials.update', $data->id) }}" method="POST" enctype="multipart/form-data" class="modal-body">
+            <form action="" method="POST" enctype="multipart/form-data" class="modal-body">
                 @csrf
 
                 <div class="row">
@@ -70,7 +70,6 @@
                                         </div>
                                     </div>
                                     <div class="avatar-edit">
-                                    
                                         <input type="file" class="profilePicUpload" name="image" id="image" accept=".png, .jpg, .jpeg" >
                                         <label for="profilePicUpload1" class="bg--success">Upload Image</label>
                                         <small class="mt-2 ">Supported files:

@@ -430,7 +430,7 @@
     </li>
     <li class="menu-item @if (request()->routeIs('footer.info') active @endif">
       <a href="{{ route('footer.info') }}" class="menu-link">
-        <div data-i18n="Without navbar">Footer</div>
+        <div data-i18n="Without navbar">Footer Section</div>
       </a>
     </li>
     <li class="menu-item">
@@ -449,7 +449,7 @@
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
+      <a href="{{ route('frequently.index') }}" class="menu-link">
         <div data-i18n="Without navbar">FAQ Section</div>
       </a>
     </li>
@@ -460,22 +460,17 @@
     </li>
     <li class="menu-item">
       <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Footer Section</div>
-      </a>
-    </li>
-    <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
         <div data-i18n="Without navbar">Partner Section</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Search Section</div>
+      <a href="{{ route('about.section') }}" class="menu-link">
+        <div data-i18n="Without navbar">About Section</div>
       </a>
     </li>
     <li class="menu-item">
-      <a href="layouts-without-navbar.html" class="menu-link">
-        <div data-i18n="Without navbar">Social Icons</div>
+      <a href="{{ route('why.choose') }}" class="menu-link">
+        <div data-i18n="Without navbar">Why Choose</div>
       </a>
     </li>
     <li class="menu-item">

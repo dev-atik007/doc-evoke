@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
+    //banner section
     public function BannerSection()
     {
         $pageTitle = 'Banner Section';
@@ -46,7 +47,6 @@ class SiteController extends Controller
                 $notify[] = ['error', 'Couldn\'t upload category image'];
                 return back()->withNotify($notify);
             }
-            
         }
 
         $bannerSection->heading     = $request->heading;
@@ -62,6 +62,7 @@ class SiteController extends Controller
         dd($request->all());
     }
 
+    //contact
     public function contact()
     {
         $pageTitle = 'contact Us';
@@ -86,6 +87,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
+    // subscribe user
     public function subscribe()
     {
         $pageTitle = 'User Subscribe List';
@@ -107,7 +109,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
-
+    // footer location
     public function info()
     {
         $pageTitle = 'Footer Location Details';
@@ -136,6 +138,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
+    //emergency contact form
     public function index()
     {
         $pageTitle = 'Contact form index';
@@ -180,7 +183,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
-    
+    // All footer description
     public function description()
     {
         $pageTitle = 'All footer description';
@@ -191,17 +194,21 @@ class SiteController extends Controller
     public function sectionUpdate(Request $request, $id)
     {
         $request->validate([
-            'service'       => 'required',
-            'appointment'   => 'required',
-            'department'    => 'required',
-            'doctor'        => 'required',
-            'frequently'    => 'required',
-            'gallery'       => 'required',
-            'contact'       => 'required',
+            'why_choose'        => 'required',
+            'about_section'     => 'required',
+            'service'           => 'required',
+            'appointment'       => 'required',
+            'department'        => 'required',
+            'doctor'            => 'required',
+            'frequently'        => 'required',
+            'gallery'           => 'required',
+            'contact'           => 'required',
         ]);
 
         $footer =  Description::find($id);
 
+        $footer->why_choose   = $request->why_choose;
+        $footer->about_section= $request->about_section;
         $footer->service      = $request->service;
         $footer->appointment  = $request->appointment;
         $footer->department   = $request->department;
@@ -222,6 +229,7 @@ class SiteController extends Controller
     }
 
 
+    // testimonial
     public function testimonials()
     {
         $pageTitle = 'Testimonial List';
@@ -338,7 +346,6 @@ class SiteController extends Controller
         } else {
             return redirect()->back();
         }
-
         $notify[] = ['success', 'Data delete successfully!'];
         return redirect()->back()->withNotify($notify);
     }

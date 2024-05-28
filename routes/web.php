@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // Landing page
 Route::get('/', [FrontendController::class, 'templates'])->name('templates');
 
@@ -52,4 +51,27 @@ Route::controller('Admin\SiteController')->group(function() {
     Route::post('testination/store/{id?}', 'store')->name('destination.store');
     Route::post('/testimonials/update/{id}', 'testimonialsUpdate')->name('testimonials.update');
     Route::get('testimonials/delete/{id}', 'testimonialsDelete')->name('testimonials.delete');
+});
+
+Route::controller('Admin\FrontendController')->group(function() {
+    //Frequently Section
+    Route::get('frequentily/index', 'frequently')->name('frequently.index');
+    Route::post('frequently/store/', 'frequentlyStore')->name('frequently.store');
+    Route::post('frequently/update/{id}', 'frequentlyUpdate')->name('frequently.update');
+
+    //Why choose section
+    Route::post('why-choose/update/{id}', 'chooseUpdate')->name('choose.update');
+    Route::get('why-choose/index', 'index')->name('why.choose');
+    Route::get('why-choose/form', 'chooseForm')->name('choose.form');
+    Route::post('why-choose/store/{id?}', 'store')->name('choose.store');
+    Route::get('why-choose/edit/{id}', 'chooseEdit')->name('choose.edit');
+
+    //About Section
+    Route::post('about-section/update/{id}', 'aboutUpdate')->name('about.update');
+    Route::get('about-section/index', 'aboutIndex')->name('about.section');
+    Route::get('about-section/form', 'aboutForm')->name('about.form');
+    Route::post('about-section/store/{id?}', 'aboutStore')->name('about.store');
+    Route::get('about-section/edit/{id}', 'aboutEdit')->name('about.edit');
+    Route::get('about-section/delete/{id}', 'aboutDelete')->name('about.delete');
+    
 });
