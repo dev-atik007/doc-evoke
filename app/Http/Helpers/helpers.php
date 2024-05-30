@@ -15,6 +15,17 @@ function verificationCode($lenght)
     return random_int($min, $max);
 }
 
+function getTrx($length = 12)
+{
+    $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 function slug($string)
 {
     return Illuminate\Support\Str::slug($string);

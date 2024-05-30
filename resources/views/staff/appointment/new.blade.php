@@ -20,13 +20,17 @@
                         </thead>
                         <tbody>
                             @forelse ($appointments as $key=>$appointment)
+                                @php
+                                    // Calculate the actual row number
+                                    $rowNumber = ($appointments->currentPage() - 1) * $appointments->perPage() + $key + 1;
+                                @endphp
                                 <tr>
-                                    <td>{{ $key+1}}</td>
+                                    <td>{{ $rowNumber}}</td>
                                     <td><span class="fw-bold d-block"> {{ __($appointment->name) }}</span>
                                         {{ $appointment->mobile }}</td>
                                     <td>{{ showDateTime($appointment->booking_date) }}</td>
                                     <td>{{ $appointment->time_serial }}</td>
-                                    <td>{{ $appointment->doctor->name }}</td>
+                                    <td>{{ @$appointment->doctor->name }}</td>
                                     <td>@php echo $appointment->paymentBadge; @endphp</td>
                                     <th>@php echo $appointment->serviceBadge; @endphp</th>
                                     <td>

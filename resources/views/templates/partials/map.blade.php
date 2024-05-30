@@ -35,9 +35,7 @@
                 <h4>Call:</h4>
                 <p>{{ $bannerSections->phone }}</p>
               </div>
-
             </div>
-
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\AboutSection;
+use App\Models\Appointment;
 use App\Models\BannerSection;
 use App\Models\Department;
 use App\Models\Description;
@@ -15,6 +17,7 @@ use App\Models\Location;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Models\WhyChoose;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -22,7 +25,7 @@ class FrontendController extends Controller
     public function templates()
     {
         $pageTitle = 'Templates';
-        $departments            = Department::orderBy('name')->get();
+        $departments            = Department::orderBy('name')->with('doctors')->get();
         $locations              = Location::orderBy('name')->get();
         $bannerSections         = BannerSection::first();
         $total_doctor           = Doctor::all()->count();
@@ -35,6 +38,7 @@ class FrontendController extends Controller
         $frenquently            = Frequently::limit(4)->inRandomOrder()->get();
         $whyChoose              = WhyChoose::limit(3)->inRandomOrder()->get();
         $aboutSection           = AboutSection::limit(3)->inRandomOrder()->get();
+        // $doctors                = Doctor::orderBy('name')->get();
         return view('templates.layouts.frontend', compact('pageTitle', 'departments', 'bannerSections', 'total_doctor', 'total_department','locations', 'footer_section',
         'sections_description', 'doctors', 'services','testimonials', 'frenquently', 'whyChoose', 'aboutSection'));
     }
@@ -244,6 +248,48 @@ class FrontendController extends Controller
         return redirect()->back()->withNotify($notify);
     }
     
+    public function getDoctorsByDepartment($department)
+    {
+        $doctors = Doctor::where('department_id', $department)->get();
+        return response()->json($doctors);
+    }
 
+    public function appointmentStore(Request $request)
+    {
+
+        $request->validate([
+            'name'          => 'required|string|max:40',
+            'email'         => 'required|email',
+            'phone'         => 'required|max:40',
+            'date'          => 'required|date',
+            'department'    => 'required',
+            'doctor_id'     => 'required',
+            'message'       => 'nullable|max:255',
+
+        ]);
+
+        $gateways = ($request->payment_system == 1) ? Status::YES : Status::NO;
+        $general  = gs();
+        $mobile   = $general->country_code . $request->phone;
+        
+        $siteAppointment = new Appointment();
+
+        $siteAppointment->name          = $request->name;
+        $siteAppointment->email         = $request->email;
+        $siteAppointment->mobile        = $mobile;
+        $siteAppointment->booking_date  = Carbon::parse($request->date)->format('Y-m-d');
+        $siteAppointment-> doctor_id    = $request->doctor_id;
+        $siteAppointment->disease       = $request->message;
+        $siteAppointment->try           = $gateways ? Status::NO : STATUS::YES;
+        $siteAppointment->trx           = $gateways ? getTrx() : Null;
+
+        $siteAppointment->site = Status::YES;
+
+        $siteAppointment->save();
+
+        $notify[] = ['success', 'New Appointment booking successfully!'];
+        return redirect()->back()->withNotify($notify);
+
+    }
     
 }

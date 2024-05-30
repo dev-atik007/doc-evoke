@@ -14,7 +14,7 @@ class AppointmentController extends Controller
     public function new()
     {
         $pageTitle = 'New Appointment';
-        $appointments = Appointment::with('doctor')->latest()->paginate(getPaginate(5));
+        $appointments = Appointment::with('doctor')->latest()->paginate(getPaginate(20));
         return view('staff.appointment.new', compact('pageTitle', 'appointments'));
     }
 

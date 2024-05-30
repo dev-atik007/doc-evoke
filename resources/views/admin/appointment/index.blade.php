@@ -18,11 +18,15 @@
             </thead>
             <tbody>
                 @forelse ($appointments as $key=>$appointment)
+                        @php
+                            // Calculate the actual row number
+                            $rowNumber = ($appointments->currentPage() - 1) * $appointments->perPage() + $key + 1;
+                        @endphp
                     <tr>
-                        <td>{{ $key+1 }}</td>
+                        <td>{{ $rowNumber }}</td>
                         <td><span class="fw-bold d-block"> {{ ($appointment->name) }}</span>
                             {{ $appointment->mobile }}</td>
-                        <td></td>
+                        <td>{{ @$appointment->doctor->name }}</td>
                         <td>
                             @if ($appointment->added_staff_id)
                                     <a href="">{{ (@$appointment->staff->name) }}</a>
@@ -72,9 +76,11 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
-    <div class="p-4">
-       
+             @if (@$appointments->hasPages())
+                <div class="card-footer py-4">
+                    @php echo paginateLinks(@$appointments) @endphp
+                </div>
+            @endif
     </div>
 </div>
 @endsection

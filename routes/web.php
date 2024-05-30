@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\FrontendController;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,4 +75,10 @@ Route::controller('Admin\FrontendController')->group(function() {
     Route::get('about-section/edit/{id}', 'aboutEdit')->name('about.edit');
     Route::get('about-section/delete/{id}', 'aboutDelete')->name('about.delete');
     
+    //Appointment
+    Route::get('get-doctors/{department}', 'getDoctorsByDepartment');
+    Route::post('doctor/appointment/store/', 'appointmentStore')->name('appointment.store');
+
+
+
 });

@@ -14,7 +14,7 @@ class AppointmentController extends Controller
     public function index()
     {
         $pageTitle = 'All New Appointments';
-        $appointments = Appointment::get();
+        $appointments = Appointment::latest()->paginate(getPaginate(20));
         return view('admin.appointment.index', compact('pageTitle', 'appointments'));
     }
 
@@ -30,6 +30,7 @@ class AppointmentController extends Controller
         // $ab == 0? 'p':'u';
         $pageTitle = 'Make Appointment';
         $doctors = Doctor::orderBy('name')->get();
+    
         return view('admin.appointment.form', compact('pageTitle', 'doctors'));
     }
 
