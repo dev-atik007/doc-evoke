@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 // Landing page
 Route::get('/', [FrontendController::class, 'templates'])->name('templates');
 
-
-Route::get('/single-fullwidth-doctor', [FrontendController::class, 'singleDoctor'])->name('single.doctor');
-
-
 Route::controller('Admin\SiteController')->group(function() {
     //Subscirbe
     Route::get('subscribe', 'subscribe')->name('subscribe');
@@ -44,8 +40,6 @@ Route::controller('Admin\SiteController')->group(function() {
     Route::get('section-all', 'description')->name('description');
     Route::post('section-description/update/{id}', 'sectionUpdate')->name('section.update');
 
-    Route::get('doctor-image', 'image')->name('doctor.image');
-
     // Testimonials Section
     Route::get('testimonials', 'testimonials')->name('testimonials');
     Route::get('testinations', 'testinationForm')->name('testination.form');
@@ -60,12 +54,24 @@ Route::controller('Admin\FrontendController')->group(function() {
     Route::post('frequently/store/', 'frequentlyStore')->name('frequently.store');
     Route::post('frequently/update/{id}', 'frequentlyUpdate')->name('frequently.update');
 
+    //Appointment
+    Route::get('get-doctors/{department}', 'getDoctorsByDepartment');
+    Route::post('doctor/appointment/store/', 'appointmentStore')->name('appointment.store');
+
     //Why choose section
     Route::post('why-choose/update/{id}', 'chooseUpdate')->name('choose.update');
     Route::get('why-choose/index', 'index')->name('why.choose');
     Route::get('why-choose/form', 'chooseForm')->name('choose.form');
     Route::post('why-choose/store/{id?}', 'store')->name('choose.store');
     Route::get('why-choose/edit/{id}', 'chooseEdit')->name('choose.edit');
+ 
+    //gallery section
+    Route::get('gallery', 'galleryIndex')->name('gallery.index');
+    Route::post('gallery-store/{id?}', 'galleryStore')->name('gallery.store');
+
+    // content video section
+    Route::get('video-content/section', 'videoContent')->name('video.content');
+    Route::post('video-content/update/{id}', 'videoUpdate')->name('video.update');
 
     //About Section
     Route::post('about-section/update/{id}', 'aboutUpdate')->name('about.update');
@@ -75,9 +81,8 @@ Route::controller('Admin\FrontendController')->group(function() {
     Route::get('about-section/edit/{id}', 'aboutEdit')->name('about.edit');
     Route::get('about-section/delete/{id}', 'aboutDelete')->name('about.delete');
     
-    //Appointment
-    Route::get('get-doctors/{department}', 'getDoctorsByDepartment');
-    Route::post('doctor/appointment/store/', 'appointmentStore')->name('appointment.store');
+    //Doctor single page
+    Route::get('doctor-single/page', 'singlePage')->name('single.page');
 
 
 

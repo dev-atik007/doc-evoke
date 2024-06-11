@@ -16,7 +16,8 @@ class AppointmentController extends Controller
     {
         $pageTitle = 'All New Appointment';
         $doctor = auth()->guard('doctor')->user();
-        $appointments = Appointment::where('doctor_id', $doctor->id)->latest()->with('doctor')->paginate(getPaginate(5));
+        
+        $appointments = Appointment::where('is_complete',0)->where('doctor_id', $doctor->id)->latest()->paginate(getPaginate(20));
         return view('doctor.appointment.index', compact('pageTitle', 'appointments'));
     }
 
@@ -96,58 +97,67 @@ class AppointmentController extends Controller
         );
     }
 
-    public function done($id)
-    {
-        $appointment = Appointment::findOrFail();
-
-        if ($appointment->is_complete == Status::APPOINTMENT_INCOMPLETE && $appointment->payment_status != Status::APPOINTMENT_PAID_PAYMENT) {
-            $appointment->is_complete == Status::APPOINTMENT_COMPLETE;
-
-            if ($appointment->payment_status == Status::APPOINTMENT_CASH_PAYMENT) {
-                $doctor = Doctor::findOrFail($appointment->doctor->id);
-                $doctor->balance += $doctor->fees;
-                $doctor->save();
-                $appointment->payment_status = Status::APPOINTMENT_PAID_PAYMENT;
-            }
-
-            $appointment->save();
-            $notify[] = ['success', 'Appointed service is done successfully'];
-            return back()->withNotify($notify);
-        } else {
-            $notify[] = ['error', 'Something is wrong!'];
-            return back()->withNotify($notify);
-        }
-    }
-    
-
     public function appointmentCompleted()
     {
-        // $doctor = Doctor::with(['appointments'=>function($query) {
-        //     $query->where('is_complete',1)->get();
-        // }])->where('id', $id)->first();
+        $pageTitle = 'Appointment Done Service';
 
         $doctor = auth()->guard('doctor')->user();
-         $appointments = $doctor->isCompleteappointments;
-// dd($doctor);
-        $pageTitle = 'Done Appointment';
-        return view('doctor.appointment.doneService', compact('pageTitle','appointments'));
+
+        $appointments = $doctor->isCompleteappointments()->where('is_complete',1)->paginate(getPaginate(20));
+        return view('doctor.appointment.index', compact('pageTitle', 'appointments'));
     }
 
-    public function doneService(Request $request, $id)
+    public function doneService ($id)
     {
-        $appointment = Appointment::findOrFail();
+        $appointment = Appointment::findOrFail($id);
+
         $appointment->is_complete = 1;
         $appointment->payment_status = 1;
         $appointment->save();
 
         $pageTitle      = 'Done Appointments';
-        $notify[] = ['success', 'Appoinment Success'];
+        $notify[] = ['success', 'Appointment Completed'];
+
         return back()->withNotify($notify);
     }
 
+
+    public function serviceTrashed()
+    {
+        $pageTitle = 'Trashed Appointments';
+        $doctor = auth()->guard('doctor')->user();
+        $appointments = $doctor->appointments()->where('is_delete', 1)->paginate(getPaginate(20));
+        
+        
+        return view('doctor.appointment.index', compact('pageTitle', 'appointments'));
+
+    }
+
+    public function remove($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        if ($appointment->is_delete || $appointment->payment_status) {
+            $notify[] = ['error', 'Appointment trashed operation is invalid'];
+            return back()->withNotify($notify);
+        }
+
+        $appointment->is_delete = Status::YES;
+
+        $appointment->delete_by_doctor = auth()->guard('doctor')->id();
+
+        $appointment->save();
+
+
+        $notify[] = ['success', 'Appointment service is trashed successfully'];
+        
+        return back()->withNotify($notify);
+    }
+
+
+
    
-   
-   
+
 
     
 }

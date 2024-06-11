@@ -40,9 +40,11 @@ Route::middleware('admin')->group(function () {
     Route::controller('DepartmentController')->prefix('department')->name('department.')->group(function () {
         Route::get('index', 'index')->name('index');
         Route::post('store/{id?}', 'store')->name('store');
+        Route::post('update/{id}', 'departmentUpdate')->name('department.update');
         
         Route::get('location', 'location')->name('location');
         Route::post('location/store/{id?}', 'locationStore')->name('location.store');
+        Route::post('location/update/{id}', 'locationUpdate')->name('location.update');
     });
 
     // Doctor Manage
@@ -98,12 +100,19 @@ Route::middleware('admin')->group(function () {
 
     Route::controller('AppointmentController')->prefix('appointment')->name('appointment.')->group(function (){
         //Create Appointment
-        Route::get('index', 'index')->name('index');
         Route::get('form', 'form')->name('form');
         Route::get('details', 'details')->name('book.details');
         Route::get('booking/availability/date', 'availability')->name('available.date');
         Route::post('store/{id}', 'store')->name('store');
+        Route::get('index', 'index')->name('index');
 
+
+        Route::get('completed', 'appointmentCompleted')->name('completed');
+        Route::post('service/done/{id}', 'doneService')->name('done');
+
+
+        Route::get('trashed', 'serviceTrashed')->name('trashed');
+        Route::post('remove/{id}', 'remove')->name('remove');
     });
 
 
@@ -111,8 +120,7 @@ Route::middleware('admin')->group(function () {
 
         // Banner Section
         Route::get('banner-section', 'BannerSection')->name('banner.section');
-        Route::post('banner-store/{id?}', 'bannerStore')->name('banner.section.store');
-        Route::post('banner-section/{id}', 'bannerUpdate')->name('banner.update');
+        Route::post('banner/update{id}', 'bannerUpdate')->name('banner.update');
 
         // Emergency Contact
         Route::get('emergency-contact', 'contact')->name('emergency.contact');

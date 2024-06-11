@@ -22,45 +22,37 @@ class SiteController extends Controller
         return view('admin.frontend.banner.index', compact('pageTitle', 'bannerSection'));
     }
 
-    public function bannerStore(Request $request, $id = 0)
+    
+    public function bannerUpdate(Request $request, $id)
     {
         $imageValidation = $id ? 'nullable' : 'required';
-        $request->validate([
-            'image'         => ["$imageValidation", new FileTypeValidate(['jpeg', 'jpg', 'png'])],
-            'heading'       => 'required|max:40',
-            'sub_heading'   => 'required|max:100',
-        ]);
 
-        if($id) {
-            $bannerSection = BannerSection::findOrFail($id);
-            $notification  = 'Banner Section updated successfully';
-        } else {
-            $bannerSection = new BannerSection();
-            $notification  = 'Banner Section Added successfully';
-        }
-       
+        $request->validate([
+            'heading'       => 'required|max:40|unique:bannerSections,heading,' . $id,
+            'sub_heading'   => 'required|max:100',
+            'image'         => [$imageValidation, new FileTypeValidate(['jpeg', 'jpg', 'png'])],
+        ]);
+  
+        $bannerSection = BannerSection::findOrFail($id);
+
         if($request->hasFile('image')) {
             
             try {
-                $bannerSection->image = fileUploader($request->image, getFilePath('banner'), null, @$bannerSection->image);
+                $bannerSection->image = fileUploader($request->image, getFilePath('banner'), getFileSize('banner'), @$bannerSection->image);
             } catch (\Exception $exp) {
                 $notify[] = ['error', 'Couldn\'t upload category image'];
                 return back()->withNotify($notify);
             }
         }
-
+      
         $bannerSection->heading     = $request->heading;
         $bannerSection->subheading  = $request->sub_heading;
         $bannerSection->save();
 
-        $notify[] = ['success', $notification];
-        return back()->withNotify($notify);
+        $notify[] = ['success', 'Banner Section updated successfully'];
+        return redirect()->back()->withNotify($notify);
     }
-    
-    public function bannerUpdate(Request $request, $id)
-    {
-        dd($request->all());
-    }
+
 
     //contact
     public function contact()
@@ -221,13 +213,6 @@ class SiteController extends Controller
         $notify[] = ['success', 'Section description updated successfully'];
         return redirect()->back()->withNotify($notify);
     }
-
-    public function image()
-    {
-        $pageTitle = 'Image';
-        return view('admin.frontend.doctor_image.image', compact('pageTitle'));
-    }
-
 
     // testimonial
     public function testimonials()

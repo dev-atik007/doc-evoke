@@ -40,7 +40,7 @@
                                 class="btn btn-sm btn-outline--primary"> <i class="las la-check-circle"></i>
                                 Done List
                             </a>
-                            <a href=""
+                            <a href="{{ route('assistant.doctor.appointment.trashed', $doctor->id) }}"
                                 class="btn btn-sm btn-outline--danger"> <i class="las la-trash"></i>
                                 Trash List
                             </a>

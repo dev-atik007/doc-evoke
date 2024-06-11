@@ -48,7 +48,7 @@
                 <form action="" class="dealing-route" method="post">
                     @csrf
                     <button type="submit" class="btn btn-outline--success btn-sm serviceDoneBtn"><i
-                            class="las la-check"></i>Done</button>
+                        class="las la-check"></i>Done</button>
                     <button type="button" class="btn btn--dark btn-sm" data-bs-dismiss="modal">Close</button>
                 </form>
             </div>

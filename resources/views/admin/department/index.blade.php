@@ -19,17 +19,24 @@
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td>
-
                         <img src="{{ getImage(getFilePath('department') . '/' . $department->image, getFileSize('department')) }}" class="img-thumbnail rounded" style="width:50px" alt="@lang('Image')">
-
                     </td>
-                    <td>{{ $department->name }} </td>
+                    <td>{{ $department->name }}</td>
                     <td>{{ Str::limit ($department->details, 30) }}</td>
                     <td>{{ Str::limit ($department->about, 30) }}</td>
+
                     <td>
-                        <button type="button" class="btn btn-sm btn-label-primary editBtn" data-info="{{ $department }}" data-resource="" data-image="">
-                            <span class="btn btn-primary btn-sm">Edit</span>
-                        </button>
+                        <div class="button--group">
+                            <button class="btn btn-sm btn-outline--primary editBtn" data-department="{{ $department }}">
+                                <i class="las la-desktop"></i> Details
+                            </button>
+
+
+                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="" data-question="@lang('Are you sure to remove this appointment')?">
+                                <i class="la la-trash"></i> Trash
+                            </button>
+
+                        </div>
                     </td>
                 </tr>
                 @empty
@@ -67,7 +74,7 @@
                                 <div class="image-upload">
                                     <div class="thumb">
                                         <div class="avatar-preview">
-                                            <div class="profilePicPreview" style="background-image: ">
+                                            <div class="profilePicPreview">
                                                 <button type="button" class="remove-image"><i class="fa fa-times"></i></button>
                                             </div>
                                         </div>
@@ -107,18 +114,17 @@
 </div>
 
 <!-- Edit Modal -->
+
+<!-- Edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel3">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel3">Edit Department</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-
             <form action="" method="POST" enctype="multipart/form-data" class="modal-body">
                 @csrf
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -126,16 +132,15 @@
                             <div class="image-upload">
                                 <div class="thumb">
                                     <div class="avatar-preview">
-                                        <div class="profilePicPreview" style="background-image: ">
+                                        <div class="profilePicPreview">
+                                            <img src="" alt="" class="img-thumbnail rounded imagePathSet" style="width:355px">
                                             <button type="button" class="remove-image"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                     <div class="avatar-edit">
-                                        <input type="file" class="profilePicUpload" name="image" id="profilePicUpload1" accept=".png, .jpg, .jpeg" required>
-                                        <label for="profilePicUpload1" class="bg--success">Upload Image</label>
-                                        <small class="mt-2 ">Supported files:
-                                            <b>png,@lang('jpg'),jpeg.</b>
-                                            Image will be resized into department </small>
+                                        <input type="file" class="profilePicUpload" name="image" id="profilePicUpload2" accept=".png, .jpg, .jpeg">
+                                        <label for="profilePicUpload2" class="bg--success">Upload Image</label>
+                                        <small class="mt-2">Supported files: <b>png, jpg, jpeg.</b> Image will be resized into department</small>
                                     </div>
                                 </div>
                             </div>
@@ -158,19 +163,16 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 @endsection
 
 @push('breadcrumb-plugins')
-
-<button type="button" class="btn btn-sm btn-outline--primary h-45 addBtn"> <i class="las la-plus"></i>Add New
-</button>
+<button type="button" class="btn btn-sm btn-outline--primary h-45 addBtn"> <i class="las la-plus"></i>Add New</button>
 @endpush
 
 @push('script')
@@ -179,23 +181,30 @@
         "use strict";
 
         let addModal = $("#myModal");
-        
         let editModal = $("#editModal");
-
 
         $('.addBtn').on("click", function() {
             addModal.modal("show");
         });
 
         $('.editBtn').on('click', function() {
-            let info = $(this).data('info');
-            // console.log('info');
+            let info = $(this).data('department');
+            let imagePath = "{{ url('/') }}" + '/' + "{{ getFilePath('department') }}" + '/' + info.image;
+            let editUrl = "{{ url('/') }}" + '/admin/department/update/' + info.id;
 
+            editModal.find('form').attr('action', editUrl);
+            editModal.find('.profilePicPreview').css("background-image", "url(" + imagePath + ")");
             editModal.find('[name=name]').val(info.name);
             editModal.find('[name=details]').val(info.details);
             editModal.find('[name=about]').val(info.about);
             editModal.modal("show");
-        })
+        });
     })(jQuery);
 </script>
 @endpush
+
+
+
+
+
+

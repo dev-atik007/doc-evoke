@@ -65,6 +65,21 @@ class Appointment extends Model
         return $query->where('try', Status::YES)->where('is_complete', Status::APPOINTMENT_INCOMPLETE);
     }
 
+    public function deletedByStaff()
+    {
+        return $this->belongsTo(Staff::class, 'delete_by_staff');
+    }
+
+    public function deletedByDoctor()
+    {
+        return $this->belongsTo(Doctor::class, 'delete_by_doctor');
+    }
+
+    public function deletedByAssistant()
+    {
+        return $this->belongsTo(Assistant::class, 'delete_by_assistant');
+    }
+
     public function serviceBadge(): Attribute
     {
         return new Attribute(function () {
@@ -89,6 +104,27 @@ class Appointment extends Model
             } elseif ($this->payment_status == Status::APPOINTMENT_PENDING_PAYMENT) {
                 $html = '<span class="badge badge--warning">' . trans('Pending') . '</span>';
             }
+            return $html;
+        });
+    }
+
+    public function trashBadge(): Attribute
+    {
+        return new Attribute(function () {
+            $html = '';
+            if ($this->delete_by_admin) {
+                $html = '<span class="text--small badge badge--primary">' . trans('Admin') . '</span>';
+            } elseif ($this->delete_by_staff) {
+                $html = '<span>' . trans($this->deletedByStaff->name) . '</span><br>
+                <span class="text--small badge badge--dark">' . trans('Staff') . '</span>';
+            } elseif ($this->delete_by_assistant) {
+                $html = '<span>' . trans($this->deletedByAssistant->name) . '</span><br>
+                <span class="text--small badge badge--success">' . trans('Assistant') . '</span>';
+            } elseif ($this->delete_by_doctor) {
+                $html = '<span>' . trans($this->deletedByDoctor->name) . '</span><br>
+                <span class="text--small badge badge--info">' . trans('Doctor') . '</span>';
+            }
+
             return $html;
         });
     }

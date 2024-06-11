@@ -22,28 +22,34 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $appointment->name }} <br> {{ $appointment->mobile }}</td>
-                        <td>{{ $appointment->doctor->name }}</td>
+                        <td>{{ @$appointment->doctor->name }}</td>
                         <td>@php echo $appointment->addedByBadge; @endphp</td>
                         <td>{{ showDateTime($appointment->booking_date) }}</td>
                         <td>{{ $appointment->time_serial }}</td>
                         <td>@php echo $appointment->paymentBadge; @endphp</td>
                         <td>@php echo $appointment->serviceBadge; @endphp</td>
                         <td>
-                        <div class="button--group">
-                            <button class="btn btn-sm btn-outline--primary detailBtn"  data-appoinment-done="{{ route('doctor.appointment.done', $appointment->id) }}" data-resourse="{{ $appointment }}">
-                                <i class="las la-desktop"></i> Details
-                            </button>
+                            <div class="button--group">
+                                <button class="btn btn-sm btn-outline--primary detailBtn" 
+                                    data-appoinment-done="{{ route('doctor.appointment.done', $appointment->id) }}"
+                                    data-resourse="{{ $appointment }}">
+                                    <i class="las la-desktop"></i> Details
+                                </button>
 
-
-                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="" data-question="@lang('Are you sure to remove this appointment')?">
-                                <i class="la la-trash"></i> @lang('Trash')
-                            </button>
-
-                        </div>
+                                @if (request()->routeIs('doctor.appointment.index'))
+                                    <button type="button" 
+                                    class="btn btn-sm btn-outline--danger confirmationBtn"
+                                    @if (!$appointment->is_delete && !$appointment->payment_status) ''  @else disabled @endif
+                                     data-action="{{ route('doctor.appointment.remove', $appointment->id) }}" 
+                                     data-question="@lang('Are you sure to remove this appointment')?">
+                                        <i class="la la-trash"></i> @lang('Trash')
+                                    </button>
+                                @endif 
+                            </div>
                     </td>
                     </tr>
                 @empty
-                    
+                <td class="text-muted text-center" colspan="100">Data not found</td>
                 @endforelse
             </tbody>
         </table>
@@ -56,6 +62,9 @@
 </div>
 
     @include('doctor.appointment.appointment_modal')
+
+    {{-- Remove MODAL --}}
+    <x-confirmation-modal />
     
 @endsection
 

@@ -108,6 +108,9 @@
             let info = $(this).data('info');
             // console.log(info);
 
+            let editUrl = "{{ url('/') }}" + '/admin/department/location/update/' + info.id;
+
+            editModal.find('form').attr('action', editUrl);
             editModal.find('[name=name]').val(info.name);
             editModal.modal("show");
         });

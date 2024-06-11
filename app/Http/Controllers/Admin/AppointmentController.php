@@ -14,7 +14,8 @@ class AppointmentController extends Controller
     public function index()
     {
         $pageTitle = 'All New Appointments';
-        $appointments = Appointment::latest()->paginate(getPaginate(20));
+        $appointments = Appointment::where('is_complete',0)->latest()->paginate(getPaginate(20));
+
         return view('admin.appointment.index', compact('pageTitle', 'appointments'));
     }
 
@@ -51,6 +52,7 @@ class AppointmentController extends Controller
             array_push($availableDate, date('Y-m-d', strtotime($date)));
             $date->addDays(1);
         }
+
         return view('admin.appointment.booking', compact('pageTitle', 'doctor', 'availableDate'));
     }
 
@@ -62,6 +64,7 @@ class AppointmentController extends Controller
         foreach ($collection as $value) {
             $data->push($value->time_serial);
         }
+
         return response()->json(@$data);
     }
 
@@ -89,6 +92,7 @@ class AppointmentController extends Controller
         $appointment->save();
 
         $notify[] = ['success', 'New Appointment make successfully'];
+
         return back()->withNotify($notify);
     }
 
@@ -108,6 +112,80 @@ class AppointmentController extends Controller
             ]
         );
     }
+
+    public function appointmentCompleted(Request $request)
+    {   
+        $pageTitle = 'Completed Appointments';
+        $appointments = Appointment::where('is_complete',1)->latest()->paginate(getPaginate(20));
+
+        return view('admin.appointment.index', compact('pageTitle', 'appointments'));
+    }
+
+    public function doneService ($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        $appointment->is_complete = 1;
+        $appointment->payment_status = 1;
+        $appointment->save();
+
+        $pageTitle      = 'Done Appointments';
+        $notify[] = ['success', 'Appoinment Success'];
+
+        return back()->withNotify($notify);
+    }
+
+    //service Trashed
+    public function serviceTrashed()
+    {
+        $pageTitle = 'Trashed Appointments';
+        $appointments = Appointment::where('is_delete', 1)->paginate(getPaginate(20));
+        
+        return view('admin.appointment.index', compact('pageTitle', 'appointments'));
+    }
+
+    // appointment remove
+    public function remove($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        if ($appointment->is_delete || $appointment->payment_status) {
+            $notify[] = ['error', 'Appointment trashed operation is invalid'];
+            return back()->withNotify($notify);
+        }
+
+        $appointment->is_delete = Status::YES;
+
+        $appointment->delete_by_admin = auth()->guard('admin')->id();
+        
+
+        $appointment->save();
+
+        notify( $this->notifyUser($appointment), 'APPOINTMENT_REJECTION', [
+            'booking_date' => $appointment->booking_date,
+            'time_serial'  => $appointment->time_serial,
+            'doctor_name'  => $appointment->doctor->name
+        ]);
+
+        $notify[] = ['success', 'Appointment service is trashed successfully'];
+        
+        return back()->withNotify($notify);
+    }
+
+    protected  function notifyUser($appointment)
+    {
+        $user = [
+            'name'     => $appointment->name,
+            'username' => $appointment->email,
+            'fullname' => $appointment->name,
+            'email'    => $appointment->email,
+            'mobile'   => $appointment->mobile,
+        ];
+        return $user;
+    }
+
+    
+
 
     
 

@@ -34,12 +34,14 @@ Route::middleware('doctor')->group(function () {
         Route::get('booking', 'booking')->name('booking');
         Route::get('booked/date', 'availability')->name('available.date');
         Route::post('store/{id}', 'store')->name('store');
-   
 
-        Route::post('dealing/{id}', 'done')->name('dealing');
-        Route::get('doctor/appointment/completed/', 'appointmentCompleted')->name('completed');
+    
+        Route::get('completed', 'appointmentCompleted')->name('completed');
         Route::post('service/done/{id}', 'doneService')->name('done');
-           
+
+        Route::get('trashed', 'serviceTrashed')->name('trashed');
+        Route::post('remove/{id}', 'remove')->name('remove');
+        
     });
 });
 

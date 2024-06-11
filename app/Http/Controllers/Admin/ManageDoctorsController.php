@@ -16,7 +16,7 @@ class ManageDoctorsController extends Controller
     public function index()
     {
         $pageTitle = 'All Doctors';
-        $doctors = Doctor::with('department', 'location')->paginate(getPaginate(3));
+        $doctors = Doctor::with('department', 'location')->paginate(getPaginate(20));
         return view('admin.doctor.index', compact('pageTitle', 'doctors'));
     }
 
@@ -70,7 +70,6 @@ class ManageDoctorsController extends Controller
         $notify[] = ['success', $message];
         return back()->withNotify($notify);
     }
-
 
 
     public function form()

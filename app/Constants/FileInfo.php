@@ -81,11 +81,16 @@ class FileInfo
             'size'      =>'700x400',
         ];
         $data['banner'] = [
-            'path'      =>'assets/images/banner'
+            'path'      =>'assets/images/banner',
+            'size'      =>'1857x750',
         ];
-        $data['testimonial'] = [
+        $data['testimonial'] = [ 
             'path'      =>'assets/images/testimonial',
             'size'      =>'90x90',
+        ];
+        $data['gallery'] = [
+            'path'      =>'assets/images/gallery',
+            'size'      =>'466.75x350.06',
         ];
 
         return $data;

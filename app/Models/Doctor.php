@@ -41,6 +41,11 @@ class Doctor extends Authenticatable
         return $this->hasMany(Appointment::class)->where('is_complete',1);
     }
 
+    public function isDeleteappointments()
+    {
+        return $this->hasMany(Appointment::class)->where('is_delete',1);
+    }
+
     public function staffs()
     {
         return $this->hasMany(Staff::class);

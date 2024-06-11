@@ -264,3 +264,12 @@
     </ul>
   </div>
 </nav>
+<style>
+  .badge-notifications {
+    font-size: 0.75rem !important;
+    font-weight: 300;
+    position: absolute !important;
+    left: 22px !important;
+    bottom: 20px !important;
+}
+</style>

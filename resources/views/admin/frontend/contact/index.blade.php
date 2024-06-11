@@ -21,10 +21,9 @@
                                 <input class="form-control" type="text" name="phone" required value="{{ $bannerSections->phone }}">
                             </div>
                         </div>
-    
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn--primary w-60 h-45">Submit</button>
+                        <button type="submit" class="btn btn--primary w-60 h-45">Update</button>
                     </div>
                 </form>
             </div>

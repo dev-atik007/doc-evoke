@@ -38,8 +38,7 @@
   
   <style>
     #hero {
-    background: url("public/assets/admin/images/profile/{{ $bannerSections->image }}") top center;
-
+    background: url("assets/images/banner/{{ $bannerSections->image }}") top center;
   }
   </style>
 </head>

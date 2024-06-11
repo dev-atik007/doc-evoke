@@ -27,15 +27,11 @@
                     <td>@php echo $appointment->serviceBadge; @endphp</td>
                     <td>
                         <div class="button--group">
-                            <button class="btn btn-sm btn-outline--primary detailBtn" data-route="{{ route('assistant.doctor.appointment.dealing', $appointment->id) }}" data-resourse="{{ $appointment }}">
+                            <button class="btn btn-sm btn-outline--primary detailBtn"
+                                data-route="{{ route('assistant.doctor.appointment.done', $appointment->id) }}" 
+                                data-resourse="{{ $appointment }}">
                                 <i class="las la-desktop"></i> Details
                             </button>
-
-
-                            <button type="button" class="btn btn-sm btn-outline--danger confirmationBtn" data-action="" data-question="@lang('Are you sure to remove this appointment')?">
-                                <i class="la la-trash"></i> @lang('Trash')
-                            </button>
-
                         </div>
                     </td>
                 </tr>
@@ -48,4 +44,7 @@
         </table>
     </div>
 </div>
+
+@include('partials.appointment_done')
+
 @endsection

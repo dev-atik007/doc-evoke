@@ -32,11 +32,14 @@ Route::middleware('assistant')->group(function () {
         Route::get('booking/availability/date', 'availability')->name('available.date');
         Route::post('store/data/{id}', 'store')->name('store');
         Route::get('new/{id}', 'newAppointment')->name('new');
-
-
-        Route::post('dealing/{id}', 'done')->name('dealing');
+        
         Route::get('doctor/appointment/completed/{id}', 'appointmentCompleted')->name('completed');
         Route::post('service/done/{id}', 'doneService')->name('done');
+
+        Route::get('trashed/{id}', 'serviceTrashed')->name('trashed');
+        Route::post('remove/{id}', 'remove')->name('remove');
+
         
+
     });
 });
