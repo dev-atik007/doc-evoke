@@ -37,7 +37,6 @@ class Assistant extends Authenticatable
         return $this->hasMany(Appointment::class, 'assistant');
     }
 
-
     public function statusBadge($status)
     { 
         $html = '';

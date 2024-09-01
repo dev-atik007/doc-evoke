@@ -13,7 +13,7 @@ class DoctorController extends Controller
     public function dashboard()
     {
 
-        $pageTitle = 'Doctor Dashboard';
+        $pageTitle = ' Dashboard';
         $doctor = auth()->guard('doctor')->user();
         return view('doctor.dashboard', compact('pageTitle', 'doctor'));
     }

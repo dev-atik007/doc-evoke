@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Location;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 class DepartmentController extends Controller

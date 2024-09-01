@@ -58,11 +58,11 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bold">Doctor</span>
+                  <span class="app-brand-text demo text-body fw-bold">Doctor Login</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Doctor! </h4>
+              <h4 class="mb-2">{{ $general->site_name }}! </h4>
 
 
               <form action="{{ route('doctor.login') }}" method="POST" class="mb-3" >

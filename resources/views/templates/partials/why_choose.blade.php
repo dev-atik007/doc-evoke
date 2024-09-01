@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
-              <h3>Why Choose Medilab?</h3>
+              <h3>Why Choose Doc-eVoke?</h3>
               <p>
                 {{$sections_description->why_choose}}
               </p>

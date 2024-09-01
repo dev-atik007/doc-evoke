@@ -64,6 +64,14 @@ class FrontendController extends Controller
         ));
     }
 
+    //login
+    public function login()
+    {
+        $pageTitle = 'Login';
+        return view('templates.basic.login', compact('pageTitle'));
+    }
+
+    
     // frequently section
     public function frequently()
     {

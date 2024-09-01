@@ -38,7 +38,7 @@
       </nav><!-- .navbar -->
 
       <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
-      <a href="" class="appointment-btn scrollto"><span class="d-none d-md-inline"></span> Login</a>
+      <a href="{{ route('login') }}" class="appointment-btn"><span class=""></span> Login</a>
 
     </div>
   </header><!-- End Header -->

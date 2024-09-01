@@ -55,7 +55,7 @@
    @yield('assistant.content')
 
 
-
+    @include('partials.notify')
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 

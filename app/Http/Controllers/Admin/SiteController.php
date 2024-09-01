@@ -214,6 +214,7 @@ class SiteController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
+    
     // testimonial
     public function testimonials()
     {

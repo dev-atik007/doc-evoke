@@ -59,6 +59,7 @@ Route::middleware('admin')->group(function () {
         Route::get('form', 'form')->name('form');
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('detail/{id}', 'detail')->name('detail');
+  
     });
 
     Route::controller('GeneralSettingController')->group(function () {
@@ -66,6 +67,7 @@ Route::middleware('admin')->group(function () {
         Route::get('general-setting', 'index')->name('setting.index');
         Route::post('general-setting', 'update')->name('setting.update');
     });
+
 
     // Assistant Manage
     Route::controller('ManageAssistantsController')->prefix('assistant')->name('assistant.')->group(function () {
@@ -78,6 +80,7 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id?}', 'store')->name('store');
         Route::get('detail/{id}', 'detail')->name('detail');
     });
+
 
     // Staff Manage
     Route::controller('ManageStaffsController')->prefix('staff')->name('staff.')->group(function () {
@@ -106,10 +109,8 @@ Route::middleware('admin')->group(function () {
         Route::post('store/{id}', 'store')->name('store');
         Route::get('index', 'index')->name('index');
 
-
         Route::get('completed', 'appointmentCompleted')->name('completed');
         Route::post('service/done/{id}', 'doneService')->name('done');
-
 
         Route::get('trashed', 'serviceTrashed')->name('trashed');
         Route::post('remove/{id}', 'remove')->name('remove');

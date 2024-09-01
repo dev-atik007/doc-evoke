@@ -85,6 +85,6 @@ class LoginController extends Controller
     {
         $this->guard('assistant')->logout();
         $request->session()->invalidate();
-        return $this->loggedOut($request) ?: redirect()->route('assistant.login');
+        return $this->loggedOut($request) ?: redirect()->route('login');
     }
 }

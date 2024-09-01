@@ -8,6 +8,7 @@ Route::namespace('Auth')->group(function () {
     Route::controller('LoginController')->group(function () {
         Route::get('/', 'showLoginForm')->name('login');
         Route::post('/', 'login')->name('login');
+        // Route::post('/submit', 'login')->name('login.submit');
         Route::get('-logout', 'logout')->name('logout');
     });
 });

@@ -53,7 +53,8 @@
     <!-- Content -->
 
    @yield('staff.content')
-
+   
+   @include('partials.notify')
 
 
     <!-- Core JS -->

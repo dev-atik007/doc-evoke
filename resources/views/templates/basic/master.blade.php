@@ -39,17 +39,16 @@
   <script src="{{ asset('public/admin/assets/js/config.js') }}"></script>
   <!-- font awesome cdn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  @stack('style')
 </head>
 
 <body>
-  <!-- Content -->
-
-  @yield('admin.content')
 
 
+  @yield('content')
 
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
+
+
 
   <script src="{{ asset('public/admin/assets/vendor/libs/jquery/jquery.js') }}"></script>
   <script src="{{ asset('public/admin/assets/vendor/libs/popper/popper.js') }}"></script>
@@ -57,17 +56,14 @@
   <script src="{{ asset('public/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
   <script src="{{ asset('public/admin/assets/vendor/js/menu.js') }}"></script>
 
-  <!-- endbuild -->
-
-  <!-- Vendors JS -->
-
-  <!-- Main JS -->
-  <!-- <script src="{{ asset('public/admin/assets/js/main.js') }}"></script> -->
+ 
   @include('partials.notify')
-  <!-- Page JS -->
+  
 
-  <!-- Place this tag in your head or just before your close body tag. -->
+
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  @stack('script')
 </body>
 
 </html>

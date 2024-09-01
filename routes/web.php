@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 // Landing page
 Route::get('/', [FrontendController::class, 'templates'])->name('templates');
 
+ //login
+Route::get('/login', [FrontendController::class, 'login'])->name('login');
+
+
 Route::controller('Admin\SiteController')->group(function() {
     //Subscirbe
     Route::get('subscribe', 'subscribe')->name('subscribe');
